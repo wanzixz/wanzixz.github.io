@@ -1,11 +1,32 @@
 ---
-layout: default
+layout: index
 title: 我的Blog
 ---
-<h2>{{ page.title }}</h2>
-<p>最新文章</p>
-<ul>
-{% for post in site.posts %}
-　　　<li>{{ post.date | date_to_string }} <a href="{{ post.url }}">{{ post.title }}</a></li>
+<h2 class="none">文章列表</h2>
+{% for post in paginator.posts %}
+{% if post.published %}
+    {% capture y %}{{post.date | date:"%Y"}}{% endcapture %}
+
+    {% if year != y %}
+        {% if year == null %}
+<section>
+            {% assign n = y %}
+        {% else %}
+            {% if n != y %}
+</section>
+            {% endif %}
+<section>
+        {% endif %}
+        {% assign year = y %}
+    <h3 class="listing-seperator">{{ y }}</h3>
+    {% endif %}
+    <section class="listing">
+        <h4><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h4>
+        <time itemprop="datePublished" datetime="{{ post.date | date:'%Y-%m-%d' }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+        {% if site.truncate %}
+        <p>{{ post.content | strip_html | truncate: site.truncate }}</p>
+        {% endif%}
+    </section>
+{% endif%}
 {% endfor %}
-</ul>
+</section>
