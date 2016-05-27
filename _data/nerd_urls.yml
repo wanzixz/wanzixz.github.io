@@ -1,0 +1,19 @@
+- name: WebSites
+  meta: false
+  data:
+  - name: 个人相关
+    meta: false
+    data:
+      - name: CSS记录
+        url: http://www.zlmark.com
+  - name: 友情链接
+    meta: false
+    data:
+      - name: Michael Bleigh
+        url: https://github.com/staticapps/staticapps.org
+        desc: jekyll
+      - name: CSS森林
+        url: http://blog.cssforest.org
+      - name: 白树
+        url: http://peunzhang.cnblogs.com/
+        desc: 移动端开发
