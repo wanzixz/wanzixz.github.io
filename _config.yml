@@ -1,1 +1,12 @@
 baseurl: /wanzixz.github.io
+name: Css记录
+description: 记录Css中各种点滴
+author: zl
+github: wanzixz
+qq: 1471299010
+email: 1471299010@qq.com
+paginate: 50
+highlighter: rouge
+safe: true
+permalink: /:year/:month/:day/:title.html
+published: false

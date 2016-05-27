@@ -38,7 +38,7 @@ article, aside, footer, header, hgroup, main, nav, section{display: block;}
 .logo span[data-title='CSS']:hover span:nth-child(1):after{-webkit-transform:rotate(-68deg);-o-transform:rotate(-68deg);top:3px;-moz-transform:rotate(-68deg);top:3px;transform:rotate(-68deg);top:3px;}
 
 /* === nav === */
-.main-header{padding:20px 0 0;background-color:#F1F1F1;}
+.main-header{background-color:#F1F1F1;}
 .main-header nav{overflow:hidden;margin-top:16px;padding-left:3rem;background-color:#444444;}
 .main-header nav ul{display:block;margin:auto;padding:0;max-width:856px;}
 .main-header nav li{display:inline-block;margin-left:-14px;padding:8px 15px;list-style:none;font-family:inherit;}
