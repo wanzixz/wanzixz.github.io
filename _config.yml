@@ -9,5 +9,5 @@ email: 1471299010@qq.com
 paginate: 50
 highlighter: rouge
 safe: true
-permalink: /:year/:month/:day/:title.html
-published: false
+permalink: /:year/:title.html
+published: falsegit
