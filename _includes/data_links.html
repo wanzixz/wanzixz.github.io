@@ -1,10 +1,10 @@
-{% for node in include.nodes %}
-{% if node.meta == false and node.data %}
-    <h4 class="title">{{ node.name }}</h4>
+<h4 class="title">个人相关</h4>
+<ul>{% for node in include.nodes %}
+  <li>{% if node.meta == false and node.data %}
+    {{ node.name }}
     {% include data_links.html nodes=node.data %}{% else %}
-    <a href="{{ node.url }}">{{ node.name }}</a>{% if node.desc %}
+    <a href="{{ node.url }}" class="pjaxlink clearfix">{{ node.name }}</a>{% if node.desc %}
     【{{ node.desc }}】{% endif %}
-    {% endif %}
-
-{% endfor %}
+  {% endif %}</li>{% endfor %}
+</ul>
 
