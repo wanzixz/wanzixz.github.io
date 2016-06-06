@@ -19,15 +19,15 @@ title: 我的Blog
 <section>
     {% endif %}
     {% assign year = y %}
-    <h3 class="listing-seperator">{{ y }}</h3>
+    <div class="panel-heading">{{ y }}</div>
     {% endif %}
-    <section class="listing">
-        <h4><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h4>
-        <time itemprop="datePublished" datetime="{{ post.date | date:'%Y-%m-%d' }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-        {% if site.truncate %}
-        <p>{{ post.content | strip_html | truncate: site.truncate }}</p>
-        {% endif%}
-    </section>
+
+    <a href="{{ post.url }}" title="{{ post.title }}" class="list-group-item pjaxlink clearfix">{{ post.title }}</a><
+    <time class="badge" itemprop="datePublished" datetime="{{ post.date | date:'%Y-%m-%d' }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    {% if site.truncate %}
+    <p>{{ post.content | strip_html | truncate: site.truncate }}</p>
+    {% endif%}
+
     {% endif%}
     {% endfor %}
 </section>

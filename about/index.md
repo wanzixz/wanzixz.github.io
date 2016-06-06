@@ -1,6 +1,6 @@
 ---
-title: 关于我
 layout: index
+title: 关于我
 ---
 
 ## 关于Css记录

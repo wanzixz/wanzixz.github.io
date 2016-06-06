@@ -9,11 +9,19 @@
     <div class="container">
         <div class="row">
             <!--main-->
-            <!--main-->
             <main class="col-md-8 main-content">
-                <div class="panel panel-primary">
-                    {{ content }}
-                </div>
+                <header class="post-head">
+                    <h1 class="post-title">链接</h1>
+                </header>
+                <section class="post-content  widget">
+                    <div class="panel panel-primary">
+                        {{ content }}
+
+                    </div>
+                </section>
+                <article class="post page">
+
+                </article>
             </main>
             <!--aside-->
             {% include main.html %}
