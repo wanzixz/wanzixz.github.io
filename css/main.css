@@ -179,8 +179,12 @@ article, aside, footer, header, hgroup, main, nav, section{display: block;}
     padding: 35px 0 0;
     color: #959595;
 }
-
-
+/*page*/
+.paginator{
+    text-align: center;
+    padding: 10px;
+    border-top: 1px solid #eee;
+}
 /* === code === */
 .highlight .gutter,
 .highlight .code,
