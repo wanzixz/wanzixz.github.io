@@ -22,12 +22,12 @@ title: 我的Blog
     <div class="panel-heading">{{ y }}</div>
     {% endif %}
 
-    <a href="{{ post.url }}" title="{{ post.title }}" class="list-group-item pjaxlink clearfix">{{ post.title }}</a><
+    <a href="{{ post.url }}" title="{{ post.title }}" class="list-group-item pjaxlink clearfix">{{ post.title }}
     <time class="badge" itemprop="datePublished" datetime="{{ post.date | date:'%Y-%m-%d' }}">{{ post.date | date:"%Y-%m-%d" }}</time>
     {% if site.truncate %}
     <p>{{ post.content | strip_html | truncate: site.truncate }}</p>
     {% endif%}
-
+    </a>
     {% endif%}
     {% endfor %}
 </section>
