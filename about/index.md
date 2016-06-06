@@ -1,5 +1,5 @@
 ---
-layout: index
+layout: page
 title: 关于我
 ---
 
