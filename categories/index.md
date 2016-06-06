@@ -1,6 +1,6 @@
 ---
+layout: article
 title: 分类
-layout:article
 ---
 
 ## 分类列表
