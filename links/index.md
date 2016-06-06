@@ -1,6 +1,6 @@
 ---
 title: 链接
-layout: index
+layout: link
 ---
 
 ## 链接

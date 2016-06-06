@@ -1,6 +1,6 @@
 ---
 title: 标签
-layout: index
+layout: tag
 ---
 
 ## 分类标签
