@@ -1,12 +1,10 @@
 {% for node in include.nodes %}
 {% if node.meta == false and node.data %}
-<h4 class="title">{{ node.name }}</h4>
-<ul>
+    <h4 class="title">{{ node.name }}</h4>
     {% include data_links.html nodes=node.data %}{% else %}
-    <li>
-        <a href="{{ node.url }}">{{ node.name }}</a>{% if node.desc %}
-        【{{ node.desc }}】{% endif %}
-    </li>
+    <a href="{{ node.url }}">{{ node.name }}</a>{% if node.desc %}
+    【{{ node.desc }}】{% endif %}
     {% endif %}
-</ul>
+
 {% endfor %}
+
