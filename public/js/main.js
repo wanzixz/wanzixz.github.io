@@ -18,7 +18,10 @@ var afterPjax = function() {
        || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
   };
+$('.show-commend').on('click',function(){
   afterPjax();
+})
+
   //back-to-top
 var backup = function(){$(window).scroll(function(){
       if ($(this).scrollTop() > 100) {
@@ -42,11 +45,10 @@ $(document).on({
       main.removeClass('fadeIn');
     },
     'pjax:end': function() {
-      afterPjax();
       backup();
       NProgress.done();
       main.scrollTop(0).addClass('fadeIn'); 
-      window.location.reload();
+
     }
   });
 
