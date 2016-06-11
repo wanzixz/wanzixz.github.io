@@ -35,7 +35,7 @@
                         <ul>
                         {% if forloop.first %}
                             <li id="{{next_year}}-{{next_month}}">
-                                <a class="pjaxlink" href="{{ "/pages/archive.html" }} #{{this_year}}-{{this_month}}">{{this_year}}年-{{this_month}}月</a>
+                                <a class="pjaxlink" href="{{ "/pages/archive.html" }}#{{this_year}}-{{this_month}}">{{this_year}}年-{{this_month}}月</a>
                             </li>
                         {% endif %}
                         </ul>
@@ -45,7 +45,7 @@
                         <ul>
                             {% if this_year != next_year %}
                             <li id="{{next_year}}-{{next_month}}">
-                                <a class="pjaxlink" href="{{ "/pages/archive.html" }} #{{next_year}}-{{next_month}}">{{next_year}}年-{{next_month}}月</a>
+                                <a class="pjaxlink" href="{{ "/pages/archive.html" }}#{{next_year}}-{{next_month}}">{{next_year}}年-{{next_month}}月</a>
                             </li>
                           {% endif %}
                         </ul>
@@ -58,7 +58,7 @@
                     <h4 class="title">标签云</h4>
                     <div class="content tag-cloud">
                         {% for tag in site.tags %}
-                            <a class="pjaxlink" href="{{ "/pages/tags.html" }} #{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a> 
+                            <a class="pjaxlink" href="{{ "/pages/tags.html" }}#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a> 
                         {% endfor %}
                     </div>
                 </div>
