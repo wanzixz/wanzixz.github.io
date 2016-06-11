@@ -1,17 +1,3 @@
-<header class="main-header" style="background-image: url(http://img.t.sinajs.cn/t6/skin/skin053/images/body_bg_page.jpg?id=201503261330)">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <!-- start logo -->
-                <a class="branding" href="/" title="{{ site.name }}"><img class="brandimg" src="http://tva4.sinaimg.cn/crop.0.49.300.300.180/6482b7ccjw8f2ano0ecz7j208c0b2dg4.jpg" alt="{{ site.name }}"></a>
-                <!-- end logo -->
-                <h1 class="brandname">zlmark</h1>
-                <h2 class="text-hide none">{{ site.description }}</h2>
-            </div>
-        </div>
-    </div>
-</header>
-
 <!--nav start-->
 <nav class="main-navigation">
     <div class="container">
@@ -19,18 +5,17 @@
             <div class="col-sm-12">
                 <div class="navbar-header">
                         <span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu">
-                        <span class="sr-only">Toggle navigation</span>
+                        <span class="sr-only">Menu</span>
                         <i class="glyphicon  glyphicon-align-justify"></i>
                         </span>
                 </div>
                 <div class="collapse navbar-collapse" id="main-menu">
-                    <ul class="menu">
-                        <li class="nav-current" role="presentation"><a href="/">首页</a></li>
-                        <li role="presentation"><a href="/categories/">文章分类</a></li>
-                        <li role="presentation"><a href="/tags/" >标签</a></li>
-                        <li role="presentation"><a href="#">案例</a></li>
-                        <li role="presentation"><a href="/links/">链接</a></li>
-                        <li role="presentation"><a href="/about/">关于</a></li>
+                    <ul class="menu" id="menu">                      
+                        <li class="{% if page.home %}nav-current{% endif %}"><a class="pjaxlink" href="{{ site.baseurl }}/">首页</a></li>
+                        <li class="{% if page.catepage %}nav-current{% endif %}"><a class="pjaxlink" href="{{ "/pages/categories.html"}}">{{ site.locals.post }}</a></li>
+                        <li class="{% if page.tagspage | page.postpage | page.siglepage %}nav-current{% endif %}"><a class="pjaxlink" href="{{ "/pages/tags.html" }}">{{ site.locals.tags }}</a></li>
+                        <li class="{% if page.archivepage %}nav-current{% endif %}"><a class="pjaxlink" href="{{ "/pages/archive.html" }}">{{ site.locals.archive }}</a></li>
+                        <li class="{% if page.aboutpage %}nav-current{% endif %}" ><a  class="pjaxlink" href="{{"/pages/page.html"}}">{{ site.locals.about }}</a></li>
                     </ul>
                 </div>
             </div>
@@ -39,3 +24,7 @@
 </nav>
 <!--nav end-->
 
+<!--content start-->
+<section class="content-wrap">
+    <div class="container">
+        <div class="row">

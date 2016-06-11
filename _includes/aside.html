@@ -1,51 +1,73 @@
-<aside class="col-md-4 sidebar">
-    <div class="widget">
-        <h4 class="title">个人资料</h4>
-        <div class="content community">
-            <p>QQ：1471299010</p>
-            <p><a href="#" title="留言" target="_blank" ><i class="glyphicon glyphicon-comment"></i> 给我留言</a></p>
-            <p>
-                <a href="#" title="zlmark微博" target="_blank" ><i class="glyphicon glyphicon-heart"></i> 官方微博</a>
-            </p>
-        </div>
-    </div>
+ <aside class="col-md-4 sidebar">
+                <div class="widget">
+                    <h4 class="title">{{ site.locals.friend}}</h4>
+                    <div class="content community">
+                        <p>QQ：{{ site.qq }}</p>
+                        <P>邮箱：{{ site.email}}</P>
+                        <P>GitHub：<a href="http://github.com/{{ site.github}}" target="_blank">http://github.com/{{ site.github}}</a>  </P>
+                        <p>RSS: <a href="{{ "/feed.xml" | prepend: site.baseurl }}" title="RSS订阅所有文章">订阅文章</a></p>
+                    </div>
+                </div>
 
-    <div class="widget">
-        <h4 class="title">目录</h4>
-        <div class="content community">
-            <ul>
-                <li><a href="">读书</a></li>
-                <li><a href="">生活</a></li>
-                <li><a href="">绘画</a></li>
-                <li><a href="">厨房</a></li>
-                <li><a href="">科研</a></li>
-                <li><a href="">技术</a></li>
-            </ul>
-        </div>
-    </div>
+                <div class="widget">
+                    <h4 class="title">{{ site.locals.cate}}</h4>
+                    <div class="content community">
+                        <ul>
+                            {% for cat in site.categories %}
+                            <li>
+                                <a class="pjaxlink" href="{{ "/pages/categories.html" }}#{{cat[0] }}" title="{{ cat[0] }}" rel="{{ cat[1].size }}">
+                                    {{ cat[0] }} ({{ cat[1].size }})
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
 
-    <div class="widget">
-        <h4 class="title">归档</h4>
-        <div class="content community">
-            <ul>
-                <li><a href="">2016年-01月</a> <span class="orange">(3)</span></li>
-                <li><a href="">2016年-02月</a></li>
-                <li><a href="">2016年-03月</a></li>
-                <li><a href="">2016年-04月</a></li>
-                <li><a href="">2016年-05月</a></li>
-                <li><a href="">2016年-06月</a></li>
-            </ul>
-        </div>
-    </div>
+                <div class="widget">
+                    <h4 class="title">归档</h4>
+                    <div class="content community">
+{% for post in site.posts  %}
+    {% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
+    {% capture this_month %}{{ post.date | date: "%m" }}{% endcapture %}
+    {% capture next_year %}{{ post.previous.date | date: "%Y" }}{% endcapture %}
+    {% capture next_month %}{{ post.previous.date | date: "%m" }}{% endcapture %}                      
+                        <ul>
+                        {% if forloop.first %}
+                            <li id="{{next_year}}-{{next_month}}">
+                                <a class="pjaxlink" href="{{ "/pages/archive.html" }} #{{this_year}}-{{this_month}}">{{this_year}}年-{{this_month}}月</a>
+                            </li>
+                        {% endif %}
+                        </ul>
 
-    <div class="widget">
-        <h4 class="title">标签云</h4>
-        <div class="content tag-cloud">
-            <a href="/tag/customize-page/">自定义页面</a>
-            <a href="/tag/static-page/">静态页面</a>
-            <a href="/tag/roon-io/">Roon.io</a>
-            <a href="/tag/configuration/">配置文件</a>
-            <a href="/tag-cloud/">...</a>
-        </div>
-    </div>
-</aside>
+                        {% if forloop.last %}
+                        {% else %}
+                        <ul>
+                            {% if this_year != next_year %}
+                            <li id="{{next_year}}-{{next_month}}">
+                                <a class="pjaxlink" href="{{ "/pages/archive.html" }} #{{next_year}}-{{next_month}}">{{next_year}}年-{{next_month}}月</a>
+                            </li>
+                          {% endif %}
+                        </ul>
+                        {% endif %}  
+{% endfor %}                          
+                    </div>
+                </div>
+
+                <div class="widget">
+                    <h4 class="title">标签云</h4>
+                    <div class="content tag-cloud">
+                        {% for tag in site.tags %}
+                            <a class="pjaxlink" href="{{ "/pages/tags.html" }} #{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a> 
+                        {% endfor %}
+                    </div>
+                </div>
+                {% if page.home %} 
+                <div class="widget">
+                    <h4 class="title">最新评论</h4>
+                     <div class="content ">
+                <div class="ds-recent-comments pjaxlink" data-num-items="5" data-show-avatars="1" data-show-time="1" data-show-title="1" data-show-admin="1" data-excerpt-length="70"></div>
+                 </div>
+                </div>
+                {% endif %}    
+            </aside>

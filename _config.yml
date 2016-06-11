@@ -1,13 +1,37 @@
-baseurl: /wanzixz.github.io
-siteurl: http://blog.zlmark.com
-name: zlmark
-description: 记录Css中各种点滴
+permalink: /:year/:title.html
+gems: [jekyll-paginate]
+paginate: 20
+
+# Build settings
+markdown: kramdown
+
+# Site settings
+title: zlmark
+description: zlmark's blog.
+baseurl: "" 
+url: ""
+rss_url: /pages/sitemap.xml
+
+# 作者信息
 author: wanzixz
 github: wanzixz
 qq: 1471299010
 email: 1471299010@qq.com
-paginate: 50
+
 highlighter: rouge
-safe: true
-permalink: /:year/:title.html
-published: falsegit
+
+# 主题设置，自动激活某个标签
+active: 读书
+
+# 中文本地化
+locals:
+  tags: 标签
+  about: 关于
+  post: 文章
+  archive: 归档
+  newest: 最新文章
+  friend: 互动
+  cate: 目录
+
+
+
