@@ -14,7 +14,7 @@ var afterPjax = function() {
       ds.type = 'text/javascript';ds.async = true;
       ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
       ds.charset = 'UTF-8';
-      (main 
+      (document.getElementsByClassName('content-wrap')[0] 
        || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
   };
