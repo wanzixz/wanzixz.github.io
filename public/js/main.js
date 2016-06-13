@@ -1,26 +1,11 @@
 
 var main = $('.content-wrap');
-var duoshuoQuery = {short_name:"zlmark"};
 
   // NProgress
   NProgress.configure({ showSpinner: false });
   // Pjax
 $(document).pjax('.pjaxlink','.content-wrap', { fragment: ".content-wrap", timeout: 10000 });
 
-  //多说
-var afterPjax = function() {
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByClassName('content-wrap')[0] 
-       || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  };
-$('.show-commend').on('click',function(){
-  afterPjax();
-})
 
   //back-to-top
 var backup = function(){$(window).scroll(function(){
@@ -48,7 +33,6 @@ $(document).on({
       backup();
       NProgress.done();
       main.scrollTop(0).addClass('fadeIn'); 
-      afterPjax();
       //window.location.reload();
     }
   });
