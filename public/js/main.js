@@ -48,7 +48,8 @@ $(document).on({
       backup();
       NProgress.done();
       main.scrollTop(0).addClass('fadeIn'); 
-      window.location.reload();
+      afterPjax();
+      //window.location.reload();
     }
   });
 
