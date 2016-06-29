@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="public/js/jquery.min.js"></script>
+</head>
+<body>
+
+<a href="test.html" class="pjaxlink"> 点击我</a>
+
+<script src="public/js/jquery.pjax.js"></script>
+
+
+<script>
+	
+$(document).pjax('.pjaxlink','body', { fragment: "body", timeout: 10000 });
+
+// Pjax 
+$(document).on({
+    'pjax:complete':function(){
+      $('#container').fadeTo(700,1); 
+      if ( $('.ds-thread, .ds-recent-comments').length > 0 ) { 
+        if (typeof DUOSHUO !== 'undefined') DUOSHUO.EmbedThread('.ds-thread');
+        else $.getScript("//static.duoshuo.com/embed.js");
+      }
+    }
+});
+
+</script>
+</html>
