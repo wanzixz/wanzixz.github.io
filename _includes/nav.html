@@ -11,11 +11,11 @@
                 </div>
                 <div class="collapse navbar-collapse" id="main-menu">
                     <ul class="menu" id="menu">                      
-                        <li class="{% if page.home %}nav-current{% endif %}"><a class="pjaxlink" href="{{ site.baseurl }}/">首页</a></li>
-                        <li class="{% if page.catepage %}nav-current{% endif %}"><a class="pjaxlink" href="{{ "/pages/categories.html"}}">{{ site.locals.post }}</a></li>
-                        <li class="{% if page.tagspage | page.postpage | page.siglepage %}nav-current{% endif %}"><a class="pjaxlink" href="{{ "/pages/tags.html" }}">{{ site.locals.tags }}</a></li>
-                        <li class="{% if page.archivepage %}nav-current{% endif %}"><a class="pjaxlink" href="{{ "/pages/archive.html" }}">{{ site.locals.archive }}</a></li>
-                        <li class="{% if page.aboutpage %}nav-current{% endif %}" ><a  class="pjaxlink" href="{{"/pages/page.html"}}">{{ site.locals.about }}</a></li>
+                        <li class="{% if page.home %}nav-current{% endif %}"><a  href="{{ site.baseurl }}/">首页</a></li>
+                        <li class="{% if page.catepage %}nav-current{% endif %}"><a  href="{{ "/pages/categories.html"}}">{{ site.locals.post }}</a></li>
+                        <li class="{% if page.tagspage | page.postpage | page.siglepage %}nav-current{% endif %}"><a href="{{ "/pages/tags.html" }}">{{ site.locals.tags }}</a></li>
+                        <li class="{% if page.archivepage %}nav-current{% endif %}"><a href="{{ "/pages/archive.html" }}">{{ site.locals.archive }}</a></li>
+                        <li class="{% if page.aboutpage %}nav-current{% endif %}" ><a  href="{{"/pages/page.html"}}">{{ site.locals.about }}</a></li>
                     </ul>
                 </div>
             </div>
