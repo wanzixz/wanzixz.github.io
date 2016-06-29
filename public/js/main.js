@@ -33,7 +33,7 @@ $(document).on({
       backup();
       NProgress.done();
       main.scrollTop(0).addClass('fadeIn'); 
-    }
+    },
     'pjax:complete':function(){
       $('#container').fadeTo(700,1); 
         if ( $('.ds-thread, .ds-recent-comments').length > 0 ) { 
