@@ -1,2 +1,2 @@
 <button type="button" class="btn btn-sm btn-default show-commend none">留言</button>
-<div class="ds-thread" id="ds-thread"  data-thread-key="{{ page.id }}" data-title="{{ page.title }}" data-url="{{ site.url }}{{ page.url }}"></div>
+<div class="ds-thread" id="ds-thread"  data-thread-key="{% if page.aboutpage %}1{% endif %}{{ page.id }}" data-title="{{ page.title }}" data-url="{{ site.url }}{{ page.url }}"></div>
