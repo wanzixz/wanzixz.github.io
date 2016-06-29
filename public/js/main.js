@@ -36,10 +36,9 @@ $(document).on({
     },
     'pjax:complete':function(){
       $('#container').fadeTo(700,1); 
-        if ( $('.ds-thread, .ds-recent-comments').length > 0 ) { 
-          if (typeof DUOSHUO !== 'undefined') DUOSHUO.EmbedThread('.ds-thread');
-          else $.getScript("//static.duoshuo.com/embed.js");
-        }
-      });
+      if ( $('.ds-thread, .ds-recent-comments').length > 0 ) { 
+        if (typeof DUOSHUO !== 'undefined') DUOSHUO.EmbedThread('.ds-thread');
+        else $.getScript("//static.duoshuo.com/embed.js");
+      }
     }
 });
