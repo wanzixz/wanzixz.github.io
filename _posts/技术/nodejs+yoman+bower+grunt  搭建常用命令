@@ -1,0 +1,39 @@
+---
+layout: post
+title: nodejs+yoman+bower+grunt 搭建常用命令
+category: 技术
+tags: nodejs,yoman,bower,grunt
+keywords: nodejs、yoman、bower、grunt
+description: nodejs,yoman,bower,grunt
+---
+
+
+npm install -g nrm         下载npm镜像资源管理工具    -g为全局
+nrm use taobao             使用taobao镜像
+nrm ls                     查看当前镜像地址
+
+
+安装yeoman的步骤
+npm install -g yo                    构建工具
+npm install -g generator-angular     项目生成器
+npm install -g bower                 JS库管理工具
+npm install -g grunt                 前端开发环境 开发，测试，打包   
+npm install -g grunt-cli
+
+
+d:                跳到D盘
+cd project        移动到project
+mkdir xxx         新建文件夹xxx 
+cd xxx            移动到xxx
+yo angular        搭建前端开发环境
+....
+npm install       安装node_modules
+bower install     安装bower_components
+grunt serve       启动grunt
+grunt build       打包
+
+
+http://idea.qinxi1992.cn                   激活webstorm
+
+bower install ui-router --save               安装一个bower组件   --save 更新至bower.json   dependencies
+bower install ui-router --save-dev           安装一个bower组件   --save 更新至bower.json   devDependencies
