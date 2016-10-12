@@ -5,7 +5,7 @@ home: true
 
 <main class="col-md-8 main-content">
     <div class="panel panel-primary">
-        <div class="panel-heading">{{ site.locals.newest }} <a class="pull-right" href="http://prose.io/#wanzixz/wanzixz.github.io/tree/master/_posts" target="_blank">发布新文章</a></div>
+        <div class="panel-heading">{{ site.locals.newest }} </div>
         {% for post in paginator.posts %}
           <a href="{{ post.url | prepend: site.baseurl }}" class="list-group-item pjaxlink clearfix">
                             {{ post.title }}
