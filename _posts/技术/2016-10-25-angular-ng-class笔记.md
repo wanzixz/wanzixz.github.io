@@ -1,5 +1,10 @@
 ---
 published: false
+layout: post
+category: 技术
+tags: angular
+keywords: angular
+description: angular
 ---
 ## ngClass
 
