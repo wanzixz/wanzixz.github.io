@@ -23,7 +23,7 @@ description: angular
 
 ## 三种不同使用方法：
 
-### 方法一：
+方法一：
 
 ```
 <p ng-class="{strike: deleted, bold: important, 'has-error': error}">Map Syntax Example</p>
@@ -41,7 +41,7 @@ description: angular
 </label>
 ```
 
-### 方法二：
+方法二：
 
 ```
 <p ng-class="style">Using String Syntax</p>
@@ -57,7 +57,7 @@ description: angular
        placeholder="Type: bold, strike or red" aria-label="Type: bold, strike or red 3"><br>
 ```
 
-### 方法三：
+方法三：
 
 ```
 <p ng-class="[style4, {orange: warning}]">Using Array and Map Syntax</p>
