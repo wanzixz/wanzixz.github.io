@@ -1,5 +1,4 @@
 ---
-published: false
 layout: post
 category: 技术
 tags: angular
