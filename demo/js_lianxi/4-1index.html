@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>缩略图轮播效果</title>
+<style>
+	.content{
+		width: 620px;
+		height: 340px;
+		margin: 50px auto;
+		border: 1px solid #ccc;
+		position: relative;
+	}
+	#title {
+        width: 90%;
+        height: 34px;
+        line-height: 34px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 0;
+        padding: 0 5%;
+        font-size: 16px;
+        color: #fff;
+        text-align: center;
+        background: rgba(0, 0, 0, .5);
+    }
+    #prev,
+    #next {
+        position: absolute;
+        top: 50%;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        margin-top: -25px;
+        background: #fff;
+        border: 1px solid #ccc;
+        font-size: 24px;
+        text-align: center;
+        cursor: pointer;
+    }
+    #prev {
+        left: 10px;
+    }
+    #next {
+        right: 10px;
+    }
+	#list{
+		margin: 0 0 0 -70px;
+		padding: 0;
+		width: 140px;
+		height: 24px;
+		line-height: 20px;
+		border-radius: 24px;
+		position: absolute;
+		left: 50%;
+		bottom: 10px;
+		text-align: center;
+		background: rgba(0,0,0,.5);
+	}
+	#list li{
+		width: 16px;
+		height: 16px;
+		display: inline-block;
+		margin:0 5px;
+		background: #fff;
+		border-radius:16px ;
+		vertical-align: middle;
+		position: relative;
+		cursor: pointer;
+	}
+	#list li.active{
+		background: #ff0;
+	}
+	#list li .smallimg{
+		display: none;
+		width: 138px;
+		height: 70px;
+		position: absolute;
+		bottom: 22px;
+		left: 50%;
+		margin-left:-69px ;
+	}
+	#list li .smallimg img{
+		width: 100%;
+		height: 100%;
+	}
+</style>
+</head>
+<body>
+	
+	<div id="imgbox" class="content">
+		<img id="bigimg"  alt="">
+		<h3 id="title">标题</h3>
+            <span id="prev"> < </span>
+            <span id="next"> > </span>
+            <ul id="list"></ul>
+	</div>
+</body>
+<script>
+	var imgbox = document.getElementById('imgbox');
+	var bigImg = document.getElementById('bigimg');
+	var title = document.getElementById('title');
+	var prev = document.getElementById('prev');
+	var next = document.getElementById('next');
+	var list = document.getElementById('list');
+	var liTag = list.getElementsByTagName('li');
+	var smallImg = list.getElementsByClassName('smallimg');
+	var num = 0;
+	var str='';
+	var overOut = false;
+
+	var imgArr = ['images/1.jpg', 'images/2.jpg', 'images/3.jpg', 'images/4.jpg'];
+    	var imgTxt = ['图片1', '图片2', '图片3', '图片4'];
+
+    	//初始化
+    	for(var i= 0; i<imgTxt.length; i++){
+    		 str +='<li><div class="smallimg"><img src="' + imgArr[i]+ '" ></div></li>';
+    	}
+    	list.innerHTML = str;
+
+    	function imgTab(){
+    		bigImg.src = imgArr[num];
+	    	title.innerHTML = imgTxt[num];
+	    	for(var i =0; i<smallImg.length; i++){
+				liTag[i].className = '';
+	    	}
+	    	liTag[num].className = 'active';
+    	}
+    	imgTab();
+    	
+    	function minImg(overOut,num){  //缩略图
+    		for(var i =0; i<smallImg.length; i++){
+			smallImg[i].style.display = '';
+    		}
+    		if(overOut){
+    			smallImg[num].style.display = 'block';
+    		}
+    	}
+
+    	for(var i=0;i<imgArr.length;i++){
+    		liTag[i].index = i;
+    		liTag[i].onmouseover = function(){
+    			overOut = true;
+    			num = this.index;
+    			minImg(overOut,num);
+    		}
+    	}
+
+    	for(var i=0;i<imgArr.length;i++){
+    		liTag[i].index = i;
+    		liTag[i].onmouseout = function(){
+    			overOut = false;
+    			minImg(overOut);
+    		}
+    	}
+
+    	// 缩略小点
+    	for(var i=0;i<imgArr.length;i++){
+    		liTag[i].index = i;
+    		liTag[i].onclick = function(){
+    			num = this.index;
+    			imgTab();
+    		}
+    	}
+
+    	//左边按钮
+    	prev.onclick = function(){
+    		num--;
+    		if(num ==-1){
+    			num = imgArr.length - 1;
+    		}
+    		imgTab();
+    	}
+
+    	//右边按钮
+    	next.onclick = function(){
+    		num++;
+    		if(num ==imgArr.length){
+    			num = 0;
+    		}
+    		imgTab();
+    	}
+    	
+
+</script>
+</html>

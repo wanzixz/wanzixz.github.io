@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>验证QQ号码</title>
+</head>
+<style>
+	.content{
+		width:400px;
+		height: 200px;
+		padding: 20px; 
+		margin: 50px auto;
+		position: relative;
+	}
+	.input_box{
+		display: inline-block;
+	}
+</style>
+<script>
+window.onload = function(){
+	var oText = document.getElementById('text');
+	var oBtn = document.getElementById('btn');
+
+	oBtn.onclick = function(){
+		var str = oText.value;
+
+		if(str ===''){
+			alert('请输入内容！');
+		}else{
+			if(isNaN(str)){
+				alert('输入的不是数字');
+			}else if(){
+
+			}
+		}
+	}
+}
+
+</script>
+<body>
+
+<div class="content">
+	<span>请输入QQ号码：</span>
+	<div class="input_box">
+		<input id="text" type="text"><input id="btn" type="button" value="检测">
+	</div>
+</div>
+	
+</body>
+</html>

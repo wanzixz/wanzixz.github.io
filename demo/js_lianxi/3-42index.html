@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>自动生成V字母</title>
+<style>
+#box{
+	margin-top:10px;
+	position:relative;
+}
+
+#box div{
+	width:50px;
+	height:50px;
+	background-color:red;
+	color:#FFFFFF;
+	text-align:center;
+	line-height:50px;
+	font-size:30px;
+	font-weight:bold;
+	position:absolute;
+}
+</style>
+<script>
+window.onload = function(){
+	var box = document.getElementById('box');
+	var btn = document.getElementById('btn');
+	
+	var num =11;
+	var yArr = num%2;
+	var mArr = (num - yArr)/2;
+	var clickNum = -1;
+	var str = '';
+	for(var i = 0; i<num; i++){
+		str += '<div>' + (i+1)+ '</div>';
+	}
+
+	var pArr=[
+		['left','top','left','top'],
+		['left','top','top','left'],
+		['left','bottom','left','bottom'],
+		['bottom','right','bottom','right']
+	];
+	
+	box.style.width = num*50 +'px';
+	box.style.height = num*50 +'px';
+
+	btn.onclick = function(){
+		box.innerHTML = str;
+
+		var oDiv = box.getElementsByTagName('div');
+		if(clickNum>2){
+			clickNum = 0;
+		}else{
+			clickNum ++;
+		}
+		
+		for(var i = 0; i<num; i++){
+			
+			if(i<=mArr){
+				oDiv[i].style[pArr[clickNum][0]] = i*50 +'px' ;
+				oDiv[i].style[pArr[clickNum][1]] = i*50 +'px' ;
+			}else{
+				mArr --;
+				oDiv[i].style[pArr[clickNum][2]] = i*50 +'px' ;
+				oDiv[i].style[pArr[clickNum][3]] = mArr*50 +'px' ;
+			}
+		}
+		mArr=(num-yArr)/2;
+	}
+}
+	
+
+
+
+</script>
+</head>
+<body>
+	<input id="btn" type="button" value="自动生成v字母">
+	<div id="box"></div>
+</body>
+</html>

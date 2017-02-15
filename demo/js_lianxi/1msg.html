@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>模拟手机短信发送</title>
+</head>
+<style>
+.content{
+	width: 320px;
+	margin: 50px auto;
+}
+#msgshow{
+	width: 300px;
+	height: 460px;
+	resize: none;
+	padding: 10px;
+	border: 1px solid #ccc;
+	margin-bottom: 10px;
+	overflow: hidden;
+	overflow-y: auto;
+}
+.himg{
+	display: inline-block;
+	width: 28px;
+	height: 28px;
+	vertical-align: top;
+	background: #ccc;
+}
+#msgtxt{
+	height: 24px;
+	margin: 0;
+	padding: 0 5px;
+}
+#msgbtn{
+	height: 28px;
+}
+.msgItem{
+	margin-bottom:10px ;
+	border: 1px solid #ccc;
+}
+.msgItem.on{
+	text-align: right;
+}
+</style>
+<script>
+window.onload = function  (){
+	var msgShow = document.getElementById('msgshow');
+	var hImg = document.getElementById('h_img');
+	var msgTxt = document.getElementById('msgtxt');
+	var msgBtn = document.getElementById('msgbtn');
+
+	var txNum = 0;
+	var arrImg =['images/1.png','images/2.png']; 
+	hImg.IsClick= true;
+	var oldText = msgShow.innerHTML;
+	//初始化
+	hImg.src = arrImg[txNum];
+	hImg.onclick = function(){
+		if(hImg.IsClick){
+			hImg.src = arrImg[txNum+1];
+			hImg.IsClick = false;
+		}else{
+			hImg.src = arrImg[txNum];
+			hImg.IsClick = true;
+		}
+	}
+
+	msgBtn.onclick = function(){
+		if(msgTxt.value == ''){
+			alert('发送消息为空！')
+		}else{
+			
+			if(hImg.IsClick){
+				oldText = '<div class="msgItem"><img class="himg" src="' + hImg.src +'" >' + msgTxt.value + '</div>';
+				msgShow.innerHTML = oldText + msgShow.innerHTML;
+			}else{
+				oldText = '<div class="msgItem on">' + msgTxt.value + '<img class="himg" src="' + hImg.src +'" ></div>';
+				msgShow.innerHTML = oldText + msgShow.innerHTML;
+			}
+		}
+	}
+
+
+}
+</script>
+<body>
+
+<div class="content">
+	<div id="msgshow" ></div>
+	<div>
+		<img id="h_img" class="himg" >
+		<input id="msgtxt" type="text">
+		<input id="msgbtn" type="button" value="发送">
+	</div>
+</div>
+	
+</body>
+</html>

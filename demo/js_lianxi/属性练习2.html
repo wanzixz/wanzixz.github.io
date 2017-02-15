@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>属性练习</title>
+    <style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #333;
+    }
+    
+    #imgbox {
+        width: 620px;
+        height: 340px;
+        margin: 50px auto;
+        position: relative;
+    }
+    
+    #imgbox span,
+    #imgbox p {
+        display: block;
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        font-size: 14px;
+        color: #fff;
+        background-color: rgba(0, 0, 0, .6);
+    }
+    
+    #imgbox span {
+        top: 0;
+    }
+    
+    #imgbox p {
+        margin: 0;
+        bottom: 0;
+    }
+    
+    #imgUl {
+        position: absolute;
+        top: 0;
+        right: -50px;
+        margin: 0;
+    }
+    
+    #imgUl li {
+        list-style: none;
+        width: 40px;
+        height: 40px;
+        background-color: #ccc;
+        margin-bottom: 10px;
+    }
+    
+    #imgUl li.active {
+        background-color: #ff0
+    }
+    </style>
+</head>
+
+<body>
+    <div id="imgbox">
+        <img src="" alt="">
+        <span></span>
+        <p>文字正在加载中……</p>
+        <ul id="imgUl"></ul>
+    </div>
+</body>
+<script>
+window.onload = function() {
+    var box = document.getElementById('imgbox');
+    var aImg = box.getElementsByTagName('img')[0];
+    var oSpan = box.getElementsByTagName('span')[0];
+    var oP = box.getElementsByTagName('p')[0];
+    var oUl = document.getElementById('imgUl');
+    var aLi = oUl.getElementsByTagName('li');
+
+
+    var Imgs = ['images/1.jpg', 'images/2.jpg', 'images/3.jpg', 'images/4.jpg'];
+    var ImgText = ['图片1', '图片2', '图片3', '图片4'];
+    var num = 0;
+    for (var i = 0; i < Imgs.length; i++) {
+            oUl.innerHTML += '<li></li>';
+    }
+
+    //初始化
+    function fnTab(){
+        aImg.src = Imgs[num];
+        oSpan.innerHTML = num + 1 + ' / ' + Imgs.length;
+        oP.innerHTML = ImgText[num];
+        for(var i = 0; i<aLi.length; i++){
+                aLi[i].className = '';
+        }
+        aLi[num].className = 'active';
+    }
+    fnTab();
+
+    for (var i = 0; i < aLi.length; i++) {
+        aLi[i].index = i;
+        aLi[i].onclick = function() {
+            num = this.index;
+            fnTab();
+           /*
+            aImg.src = Imgs[num];
+            oSpan.innerHTML = num + 1 + ' / ' + Imgs.length;
+            oP.innerHTML = ImgText[num];
+            for(var i = 0; i<aLi.length; i++){
+            	aLi[i].className = '';
+            }
+            //this.className = 'active';
+            aLi[num].className = 'active';
+            */
+
+        };
+    };
+
+};
+</script>
+
+</html>

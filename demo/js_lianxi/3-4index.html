@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>3自动生成V字母</title>
+<style>
+
+#dv1{
+	margin-top:10px;
+	position:relative;
+}
+
+#dv1 div{
+	width:50px;
+	height:50px;
+	background-color:red;
+	color:#FFFFFF;
+	text-align:center;
+	line-height:50px;
+	font-size:30px;
+	font-weight:bold;
+	position:absolute;
+}
+
+</style>
+<script>
+
+window.onload=function(){
+	
+	var oBtn1=document.getElementById('btn1');
+	var oDv1=document.getElementById('dv1');
+	
+	var num=11;
+	var nums=-1;
+	
+	var nm=num%2;
+	var nms=(num-nm)/2;
+	console.log(nm,nums);
+	var arr=[
+		['left','bottom','left','bottom'],
+		['bottom','left','left','bottom'],
+		['left','top','left','top'],
+		['bottom','right','right','bottom']
+	];
+	
+	var str='';
+	
+	for(var i=0;i<num;i++){
+		
+		str+='<div>'+(i+1)+'</div>';
+		
+	}
+	
+	oDv1.style.width=num*50+'px';
+	oDv1.style.height=num*50+'px';
+	
+	oBtn1.onclick=function(){
+		
+		if(nums>2){
+			
+			nums=0;
+			
+		}else{
+			
+			nums++;
+			
+		}
+		
+		oDv1.innerHTML=str;
+		
+		document.title=nums;
+		
+		var aDv=oDv1.getElementsByTagName('div');
+		
+		for(var a=0;a<num;a++){
+			
+			if(a>nms){
+				
+				nms--;
+				
+				aDv[a].style[arr[nums][0]]=a*50+'px';
+				aDv[a].style[arr[nums][1]]=nms*50+'px';
+				
+			}else{
+			
+				aDv[a].style[arr[nums][2]]=a*50+'px';
+				aDv[a].style[arr[nums][3]]=a*50+'px';
+			
+			}
+			
+		}
+		
+		nms=(num-nm)/2;
+		console.log(nm,nums);
+	}
+	
+}
+
+</script>
+</head>
+
+<body>
+
+<input id="btn1" type="button" value="小方块多次生成一个V字形" />
+
+<div id="dv1"></div>
+
+</body>
+</html>

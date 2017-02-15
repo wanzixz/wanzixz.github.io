@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>自动生成10个div-只能用定位实现</title>
+<style>
+	div{
+		width: 50px;
+		height: 50px;
+		background: red;
+		position: absolute;
+		top: 50px;
+		left: 0;
+		line-height: 50px;
+		text-align: center;
+		color: #fff;
+	}
+</style>
+<script>
+window.onload = function(){
+	var oBtn = document.getElementById('btn');
+	var  oDiv = document.getElementsByTagName('div');
+	var num = 10;
+	var str = '';
+	for(var i = 0; i<num; i++){
+		str += '<div>' + i + '</div>';
+	}
+
+	oBtn.onclick = function(){
+		document.body.innerHTML += str;
+		for(var i = 0; i<num; i++){
+			oDiv[i].style.left = i*60+ 'px';
+		}
+	}
+}
+</script>
+</head>
+<body>
+	<input id="btn" type="button" value="自动生成10个div">
+</body>
+</html>
