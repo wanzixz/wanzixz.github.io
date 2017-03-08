@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>控制多组图片切换</title>
+<style>
+body{
+	background: #f2f2f2;
+}
+.wrap {
+	width: 1200px;
+	margin: 50px auto;
+	position: relative;
+	border: 5px solid #ccc;
+}
+.clear{
+	clear: both;
+}
+.wrap-left, .wrap-right {
+	float: left;
+	position: relative;
+}
+.wrap-left {
+	width: 700px;
+	height: 306px;
+	
+}
+.wrap-right {
+	width: 495px;
+	height: 306px;
+	border-left: 5px solid #ccc;
+	overflow: hidden;
+}
+.num-box{
+	position: absolute;
+	top: 0;
+	left: 45%;
+	padding: 5px 20px;
+	background: rgba(0, 0, 0, 0.6);
+	color: #fff;
+}
+.title-box{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	background: rgba(0, 0, 0, 0.6);
+	text-align: center;
+	color: #fff;
+}
+.btn-box{
+	width: 300px;
+	margin: 20px auto;
+	text-align: center;
+}
+.btn-left, .btn-right{
+	display: inline-block;
+	width: 100px;
+	height: 35px;
+	line-height: 35px;
+	text-align: center;
+	color: #fff;
+	background: #000;
+	text-decoration: none;
+}
+</style>
+</head>
+<body>
+	<div class="wrap">
+		<div id="wrapleft" class="wrap-left">
+			<img id="leftimg" src="images/image-slider-1.jpg" alt="">
+			<div id="left-num" class="num-box">1/4</div>
+			<div id="left-title" class="title-box">第一组第1张</div>
+		</div>
+		<div id="wrapright" class="wrap-right">
+			<img id="rightimg" src="images/1.jpg" alt="">
+			<div id="right-num" class="num-box">1/3</div>
+			<div id="right-title" class="title-box">第二组第2张</div>
+		</div>
+		<div class="clear"></div>
+		<div class="btn-box">
+			<a id="btn-left" href="javascript:;"  class="btn-left">上一组</a>
+			<a id="btn-right" href="javascript:;" class="btn-right">下一组</a>
+		</div>
+	</div>
+</body>
+
+<script>
+	var leftImg = document.getElementById('leftimg');
+	var rightimg = document.getElementById('rightimg');
+	var leftTitle = document.getElementById('left-title');
+	var rightTitle = document.getElementById('right-title');
+	var leftNum = document.getElementById('left-num');
+	var rightNum = document.getElementById('right-num');
+	var btnLeft = document.getElementById('btn-left');
+	var btnRight = document.getElementById('btn-right');
+
+	var Lnum = 0;
+	var Rnum = 0;
+
+	var LimgArr = ['images/image-slider-1.jpg', 'images/image-slider-2.jpg', 'images/image-slider-3.jpg', 'images/image-slider-4.jpg'];
+	var RimgArr = ['images/1.jpg', 'images/2.jpg', 'images/3.jpg'];
+
+	// 初始化
+	leftTab();
+	function leftTab(){
+		leftImg.src = LimgArr[Lnum];
+		leftTitle.innerHTML = '第一组第' + (Lnum+1) + '张';
+		leftNum.innerHTML = Lnum+1 + '/' + LimgArr.length;
+	}
+	rightTab();
+	function rightTab(){
+		rightimg.src = RimgArr[Rnum];
+		rightTitle.innerHTML = '第二组第' + (Rnum+1) + '张';
+		rightNum.innerHTML = Rnum+1 + '/' + RimgArr.length;
+	}
+
+	leftImg.onclick = function(){
+		Lnum++;
+		if(Lnum == LimgArr.length){
+			Lnum = 0;
+		}
+		leftTab();
+	}
+	rightimg.onclick = function(){
+		Rnum++;
+		if(Rnum == RimgArr.length){
+			Rnum = 0;
+		}
+		rightTab();
+	}
+
+	btnLeft.onclick = function () {
+		Lnum--;
+		Rnum--;
+		if(Lnum == -1){
+			Lnum = LimgArr.length -1;
+		}
+		if(Rnum == -1){
+			Rnum = RimgArr.length -1;
+		}
+
+		leftTab();
+		rightTab();
+	}
+	btnRight.onclick = function () {
+		
+		Lnum++;
+		Rnum++;
+		if(Lnum == LimgArr.length){
+			Lnum = 0;
+		}
+		if(Rnum == RimgArr.length){
+			Rnum = 0;
+		}
+
+		leftTab();
+		rightTab();
+	}
+
+
+</script>
+
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>找到合适的值</title>
+</head>
+<style>
+    .content {
+        width: 1200px;
+        padding: 20px;
+        margin: 50px auto;
+        position: relative;
+    }
+    
+    .input_box {
+        display: inline-block;
+    }
+</style>
+
+<script language="javascript">
+window.onload = function(){
+    //思路分两步：作者（yanue）.
+    //1，匹配出图片img标签（即匹配出所有图片），过滤其他不需要的字符
+    //2.从匹配出来的结果（img标签中）循环匹配出图片地址（即src属性）
+    var str = '<p><img src="https://imgcache.vikduo.com/static/952c2ab2839780875a0ebe47a1a33a04.jpg" title="A1内页"/>sdfasdf<img src="https://imgcache.vikduo.com/static/952c2ab2839780875a0ebe47a1a33a04333.jpg" title="A1内页"/></p>'
+    //匹配图片（g表示匹配所有结果i表示区分大小写）
+    var imgReg = /<img [^>]*src=['"]([^'"]+)[^>]*>/gi;
+    //匹配src属性
+    var srcReg = /src=['"]?([^'"]*)['"]?/i;
+    var arr = str.match(imgReg);
+    document.getElementById('content').innerHTML = arr;
+    //console.log('所有已成功匹配图片的数组：' + arr);
+    //var img = document.getElementsByTagName('img');
+    console.log(arr);
+    var strd = [1,2]
+    var arrImgSrc = [];
+    for (var i = 0; i < arr.length; i++) {
+	var src = arr[i].match(srcReg);
+	
+        //获取图片地址
+        console.log(src[1]);
+        if (src[1]) {
+            console.log('已匹配的图片地址' + (i + 1) + '：' + src[1]);
+            arrImgSrc.push( src[1]);
+        }
+       
+        //当然你也可以替换src属性
+        if (src[0]) {
+            var t = src[0].replace(/src/i, "href");
+            //alert(t);
+        }
+      
+    }
+
+     console.log(arrImgSrc);
+}    
+</script>
+
+<body>
+
+    <div id="content" class="content">
+
+    </div>
+
+</body>
+
+</html>

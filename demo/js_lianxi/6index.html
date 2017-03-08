@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>找到合适的值</title>
+</head>
+<style>
+	.content{
+		width:1200px;
+		padding: 20px; 
+		margin: 50px auto;
+		position: relative;
+	}
+	.input_box{
+		display: inline-block;
+	}
+</style>
+<script>
+var arr = [ '100px', 'abc'-6, [], -98765, 34, -2, 0, '300', , function(){alert(1);}, null, document, [], true, '200px'-30,'23.45元', 5, Number('abc'), function(){ alert(3); }, 'xyz'-90 ];
+
+var a='<P><IMG src="http://bbs.cn.yimg.com/user_img/200701/31/jisuanji986_117025184198149.jpg" mce_src="http://bbs.cn.yimg.com/user_img/200701/31/jisuanji986_117025184198149.jpg"></P>'
+var b=/<IMG src=\"([^\"]*?)\">/gi
+var s=a.match(b)
+for(var i= 0;i<s.length;i++)
+{
+alert(s[i]);
+alert(RegExp.$1)
+}
+
+/*
+	OK-1、找到arr里所有的数字：-98765, 34, -2, 0, 5
+	OK-2、找到可以转成数字的：'100px', -98765, 34, -2, 0, '300', '23.45元',  5 
+	OK-3、把转成数字以后，最大值判断出来：300
+	OK-4、把 NaN 所在的位置找出来：1 14 17  19
+*/
+
+var tmpArr =[];
+var tmpArr2 =[];
+var tmpArr3 =[];
+var tmpMax = null;
+var tmpArr4 =[];
+
+for(var i = 0;  i < arr.length; i++){
+	if(!isNaN(arr[i]) && typeof(arr[i]) == 'number'){  //OK-1、找到arr里所有的数字：-98765, 34, -2, 0, 5
+		tmpArr.push(arr[i]);
+
+	}
+}
+//console.log(tmpArr);
+
+for(var i = 0;  i < arr.length; i++){  //OK-2、找到可以转成数字的：'100px', -98765, 34, -2, 0, '300', '23.45元',  5 
+
+	if(!isNaN(parseInt(arr[i])) ){
+		tmpArr2.push(arr[i]);	
+	}
+}
+//console.log(tmpArr2);
+
+for(var i = 0;  i < arr.length; i++){  //OK-2、找到可以转成数字的：'100px', -98765, 34, -2, 0, '300', '23.45元',  5 
+	if(!isNaN(parseInt(arr[i])) ){
+		tmpArr3.push(arr[i]);
+		for(var j = 0; j<tmpArr3.length; j++){
+			if(tmpArr3[j]>tmpArr3[j+1]){
+				tmpMax  = tmpArr3[j]
+			}
+		}	
+	}
+}
+
+//console.log(tmpMax);
+
+for(var i = 0;  i < arr.length; i++){  //OK-2、找到可以转成数字的：'100px', -98765, 34, -2, 0, '300', '23.45元',  5 
+	if(isNaN(parseInt(arr[i])) &&  typeof(arr[i]) == 'number'){
+		tmpArr4.push(i);
+	}
+	
+}
+console.log(tmpArr4);
+
+</script>
+<body>
+
+<div class="content">
+	<div>
+		<p>
+			var arr = [ '100px', 'abc'-6, [], -98765, 34, -2, 0, '300', , function(){alert(1);}, null, document, [], true, '200px'-30,'23.45元', 5, Number('abc'), function(){ alert(3); }, 'xyz'-90 ];<br/><br/>
+		</p>
+
+
+	OK-1、找到arr里所有的数字：-98765, 34, -2, 0, 5<br/><br/>
+	OK-2、找到可以转成数字的：'100px', -98765, 34, -2, 0, '300', '23.45元',  5 <br/><br/>
+	OK-3、把转成数字以后，最大值判断出来：300<br/><br/>
+	OK-4、把 NaN 所在的位置找出来：1 14 17  19<br/><br/>
+
+	</div>
+</div>
+	
+</body>
+</html>
