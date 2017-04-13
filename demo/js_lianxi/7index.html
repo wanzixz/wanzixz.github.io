@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>商品累计</title>
+<style>
+	.wrap{
+		width: 480px;
+		height: 580px;
+		margin: 50px auto;
+		border: 2px solid #666;
+		padding: 20px;
+	}
+	.box{
+		margin: 20px 0 10px;
+	}
+	.btn{
+		width: 35px;
+		height: 30px;
+		text-align: center;
+		line-height: 30px;
+		padding: 0;
+		margin: 0;
+	}
+	.num{
+		width: 50px;
+		height: 26px;
+		text-align: center;
+		line-height: 26px;
+		padding: 0;
+		margin: 0;
+	}
+	.right_text {
+		display: inline-block;
+		vertical-align: middle;
+		height: 30px;
+		line-height: 30px;
+	}
+	.all-box {
+
+	}
+</style>
+</head>
+<body>
+
+	<div id="wrap" class="wrap">
+		<div class="box">
+			<input type="button" class="minus btn" value="-">
+			<input type="text" class="nums num" value="0">
+			<input type="button" class="add btn" value="+">
+			<span class="right_text">单价<b class="single-price">12.5</b>元   小计：<b class="all-single-price">0</b>元</span>
+		</div>
+		<div class="box">
+			<input type="button" class="minus btn" value="-">
+			<input type="text" class="nums num" value="0">
+			<input type="button" class="add btn" value="+">
+			<span class="right_text">单价<b class="single-price">10.5</b>元   小计：<b class="all-single-price">0</b>元</span>
+		</div>
+		<div class="box">
+			<input type="button" class="minus btn" value="-">
+			<input type="text" class="nums num" value="0">
+			<input type="button" class="add btn" value="+">
+			<span class="right_text">单价<b class="single-price">8.5</b>元   小计：<b class="all-single-price">0</b>元</span>
+		</div>
+		<div class="box">
+			<input type="button" class="minus btn" value="-">
+			<input type="text" class="nums num" value="0">
+			<input type="button" class="add btn" value="+">
+			<span class="right_text">单价<b class="single-price">8</b>元   小计：<b class="all-single-price">0</b>元</span>
+		</div>
+		<div class="box">
+			<input type="button" class="minus btn" value="-">
+			<input type="text" class="nums num" value="0">
+			<input type="button" class="add btn" value="+">
+			<span class="right_text">单价<b class="single-price">14.5</b>元   小计：<b class="all-single-price">0</b>元</span>
+		</div>
+		<div class="all-box">
+			商品共合计：<input type="text" id="num" class="num">件，  共花费了：<input type="text" id="price" class="num"> 元<br/>
+			其中最贵的商品单价是：<input type="text" id="max" class="num">元
+		</div>
+	</div>
+	
+</body>
+
+<script>
+	var wrap = document.getElementById('wrap');
+	var box= wrap.getElementsByClassName('box');
+	var inputNumValue = wrap.getElementsByClassName("nums");
+	var bsinglePrice = wrap.getElementsByClassName("single-price");
+	var inputAllSinglePrice = wrap.getElementsByClassName("all-single-price");
+
+	var num = document.getElementById('num');
+	var price = document.getElementById('price');
+	var max = document.getElementById('max');
+	for(var i = 0; i<box.length; i++){
+		tab(i);
+	}
+
+	function count(){ //总件数
+		var b = 0;
+		var c = 0;
+		var temp = 0;
+		for(var i =0; i < inputNumValue.length; i++){
+			b += parseFloat(inputNumValue[i].value);
+			c += parseFloat(inputAllSinglePrice[i].innerHTML);
+			//当有商品的时候，才去比较单价
+			if(inputNumValue[i].value!=0){
+				if(bsinglePrice[i].innerHTML > temp){
+					temp = bsinglePrice[i].innerHTML;
+				}
+			}
+		}
+		num.value = b;	
+		price.value = c;
+		max.value = temp;
+	}
+
+	function tab(b){
+		var minusBtn = box[b].getElementsByClassName('minus');
+		var addBtn = box[b].getElementsByClassName("add");
+		var numValue = box[b].getElementsByClassName("num")[0];
+		var singlePrice = box[b].getElementsByClassName("single-price")[0];
+		var allSinglePrice = box[b].getElementsByClassName("all-single-price")[0];
+		var a = 0;
+		minusBtn[0].onclick = function (){
+			a--;
+			if(a<0){
+				a = 0;
+			}
+			allSinglePrice.innerHTML = a * singlePrice.innerHTML;
+			numValue.value = a;
+			count();
+		}
+		addBtn[0].onclick = function (){
+			a++;
+			allSinglePrice.innerHTML = a * singlePrice.innerHTML;
+			numValue.value = a;
+			count();
+		}
+	}
+	
+
+
+</script>
+</html>
