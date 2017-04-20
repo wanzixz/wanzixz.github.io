@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="webapp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>angular的Service模式学习</title>
+    <script src="js/angular.min.js"></script>
+</head>
+
+<body>
+    <div ng-controller="testCtrl" id="wrap" class="wrap">
+        <div ng-bind="name"></div>
+        <hello></hello>
+        <input type="text" ng-model="name">
+        <directititle color-attr='{{color}}'></directititle>
+    </div>
+    
+</body>
+<script>
+    var app = angular.module('webapp', []);
+    app.directive('hello', function() {
+        return {
+            restrict: 'EA',
+            template: '<div><h3>hello world</h3></div>'
+        }
+    });
+    app.directive('directititle',function(){
+        return {
+            restrict: 'EAC',
+            replace:true,
+            scope: {color:'=color'},
+            template: function(tElement,tAttrs){
+                var _html = '';
+                _html += '<div style="background-color:{{color}}">儿子:{{name}} <input ng-model="name"></div>';
+                return _html;
+            }
+
+        }
+    });
+    app.controller('testCtrl', function($scope){
+        $scope.name = 'hellow world';
+        $scope.color = 'red';
+    });
+</script>
+
+</html>

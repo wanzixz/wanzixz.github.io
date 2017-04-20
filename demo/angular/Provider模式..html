@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="webapp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>angular的Service模式学习</title>
+    <script src="js/angular.min.js"></script>
+</head>
+
+<body>
+    <div ng-controller="test" id="wrap" class="wrap">
+        <div ng-bind="name"></div>
+    </div>
+    <div ng-controller="ok">
+        <div ng-bind="name"></div>
+    </div>
+
+</body>
+<script>
+    var app = angular.module('webapp', []);
+    //如果你想在创建服务之前先对服务进行配置，那么你需要provider，因为provider可以通过定义config，并在$get中访问config
+    app.provider('myProvider', function() {
+        this.$get = function() {
+
+            return {
+                name: '朱子明',
+                squad: '八路军',
+                role: this.roleSet
+            }
+        }
+    });
+
+    /*名字必须符合规范：xxxxxxProvider*/
+    app.config(function(myProviderProvider) {
+        myProviderProvider.roleSet = "保卫干事";
+    });
+
+    app.controller('test', function($scope, myProvider) {
+        $scope.name = myProvider.name;
+    });
+    app.controller('ok', function($scope, myProvider) {
+        $scope.name = myProvider.role;
+    });
+</script>
+
+</html>

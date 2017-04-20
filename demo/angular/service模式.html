@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="webapp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>angular的Service模式学习</title>
+    <script src="js/angular.min.js"></script>
+</head>
+
+<body>
+    <div ng-controller="test" id="wrap" class="wrap">
+        <div ng-bind="name"></div>
+    </div>
+    <div ng-controller="ok">
+        <div ng-bind="name"></div>
+    </div>
+
+</body>
+<script>
+    var app = angular.module('webapp', []);
+    //在service使用构造函数的方法去用它，在控制器中是以new的方式引入，所以可以调用service中定义的属性
+    app.service('myservice', function() {
+        this.num = Math.floor(Math.random() * 10); //0到10的随机数
+        this.pop = function(arg) {
+            return arg;
+        }
+    });
+
+
+    app.controller('test', function($scope, myservice) {
+        $scope.name = myservice.num;
+    });
+    app.controller('ok', function($scope, myservice) {
+        $scope.name = myservice.pop('哈哈');
+    });
+</script>
+
+</html>

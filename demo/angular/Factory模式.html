@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="webapp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>angular的Factory模式学习</title>
+    <script src="js/angular.min.js"></script>
+</head>
+
+<body>
+    <div ng-controller="test" id="wrap" class="wrap">
+        <div ng-bind="name"></div>
+    </div>
+    <div ng-controller="ok">
+        <div ng-bind="name"></div>
+    </div>
+
+</body>
+<script>
+    var app = angular.module('webapp', []);
+    //Factory模式通过注册.factory('my注册名',方法())
+    app.factory('mytest', function() {
+        var obj = {};
+        obj.exec = function() {
+            console.log(arguments);
+            var arr = [];
+            for (var i = 0; i < arguments.length; i++) {
+                arr.push(arguments[i]);
+            }
+            return arr;
+        }
+        return obj;
+    });
+
+
+
+    app.controller('test', function($scope, mytest) {
+        $scope.name = mytest.exec('张三的歌', '李四的舞', '老王贼六');
+    });
+    app.controller('ok', function($scope, mytest) {
+        $scope.name = mytest.exec('oktest')
+    });
+</script>
+
+</html>
