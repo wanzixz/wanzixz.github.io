@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        li {
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            background: red;
+            margin-bottom: 10px;
+            transition: all 1s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="div1" class="div1">
+        <!--123-->
+
+    </div>
+
+    <ul id="ul">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+</body>
+<script>
+    var div = document.getElementById('div1');
+    //console.log(div.childNodes[3]);
+
+    for (var i = 0; i < div.attributes.length; i++) {
+        console.log(div.attributes.length)
+    }
+    var a = 1;
+    (function a(a){
+        a++;
+        alert(a);
+    })(a);
+    alert(a);
+    this['a']--;
+    alert(a);
+    var ul = document.getElementById('ul');
+    //var lis = ul.childNodes;
+    var lis = ul.children;
+    var onOff = false;
+    document.onclick = function() {
+        for (var i = 0; i < lis.length; i++) {
+            //if(lis[i].nodeType ==1)
+            if (onOff) {
+                lis[i].style.width = '50' + 'px';
+            } else {
+                lis[i].style.width = '500' + 'px';
+            }
+        }
+        onOff = !onOff;
+    }
+</script>
+
+</html>

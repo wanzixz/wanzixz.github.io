@@ -6,14 +6,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>百度文库评分</title>
+    <style>
+        p {
+            width: 400px;
+            margin: 50px auto;
+            border: 1px solid #eee;
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        span {
+            margin: 0 5px;
+        }
+        
+        #comment {
+            display: inline-block;
+            width: 2em;
+        }
+    </style>
+    <script>
+        var rating = document.getElementById('rating'),
+            aA = rating.getElementsByTagName('a'),
+            aImg = rating.getElementsByTagName('img'),
+            comment = document.getElementById('comment');
+        var arrImg = ['images/nst.gif', 'images/sth.gif'];
+
+        for (var i = 0; i < aA.length; i++) {
+            aA[i].index = i;
+            aA[i].onmouseover = function() {
+
+            }
+        }
+
+        function start() {
+
+        }
+    </script>
 </head>
 
 <body>
     <p>
         我的评价：
         <span id="rating">
-          <a href="javascript:;">xing</a>
+          <a href="javascript:;"><img src="images/nst.gif" alt=""></a>
+          <a href="javascript:;"><img src="images/nst.gif" alt=""></a>
+          <a href="javascript:;"><img src="images/nst.gif" alt=""></a>
+          <a href="javascript:;"><img src="images/nst.gif" alt=""></a>
+          <a href="javascript:;"><img src="images/nst.gif" alt=""></a>
         </span>
+        <span id="comment"></span>
     </p>
 
 </body>
