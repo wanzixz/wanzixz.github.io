@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>offsetLeft、offsetParent</title>
+  <style>
+/*    div{
+      padding:100px;
+    }*/
+    body{margin:0; padding:0;}
+    #div1 { width:100px; height:100px; background: red; top:50px; left:50px; position: absolute; border:10px solid #333;}
+    #div2 { width:60px; height:60px; background: blue; top:30px; left: 30px; position: absolute; border:10px solid #333;}
+    #div3 { width:30px; height:30px; background: yellow; position:absolute; top:20px; left:0; border:1px solid #333; transition:  left .3s;}
+  </style>
+</head>
+<body>
+  <input type="button" value="点击就走" onclick="setLeft()">
+  <div id="div1">
+    <div id="div2">
+      <div id="div3"></div>
+    </div>
+  </div>
+
+  <script>
+    
+    //console.log(div3.offsetParent);
+    //console.log(div3.offsetTop);
+    var div3 = document.getElementById('div3');
+
+    /*function setLeft(){
+      var elem = div3;
+      var left=0;
+      var div3B = parseInt(getComputedStyle(div3).borderLeftWidth);
+      console.log(div3B);
+      while(elem){
+        left += elem.offsetLeft + parseInt(getComputedStyle(elem).borderLeftWidth);
+        elem = elem.offsetParent;
+      }
+      left -= div3B;
+      div3.style.left = -left + 'px';
+      console.log(left);
+    }*/
+    function setLeft(){
+      var obj = div3.getBoundingClientRect();
+      div3.style.left = -obj.left + 'px';
+      console.log(obj.left);
+    }
+    
+  </script>
+</body>
+</html>

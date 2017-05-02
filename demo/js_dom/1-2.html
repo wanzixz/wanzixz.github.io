@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>节点例子</title>
+    <style>
+        ul {
+            width: 200px;
+        }
+        
+        ul li {
+            color: #666;
+            background-color: #eee;
+            font-weight: bold;
+            font-size: 14px;
+            height: 30px;
+            line-height: 30px;
+            padding: 0 20px;
+            list-style: none;
+        }
+        
+        ul .focus {
+            font-size: 22px;
+            background-color: #555;
+            color: #fff;
+        }
+        
+        ul .near {
+            font-size: 18px;
+            background-color: #ccc;
+            color: blue;
+        }
+        
+        ul .none {
+            background-color: #333;
+            color: #fff
+        }
+        
+        ul .side {
+            background: orange;
+        }
+    </style>
+</head>
+
+<body>
+
+    <ul id="ul1">
+        <li class="none">这是首行</li>
+        <li>11</li>
+        <li>22</li>
+        <li>33</li>
+        <li>44</li>
+        <li>55</li>
+         <li>11</li>
+        <li>22</li>
+        <li>33</li>
+        <li>44</li>
+        <li>55</li>
+        <li class="none">这是末行</li>
+    </ul>
+
+    <script>
+        var ul = document.getElementById('ul1');
+        var li = ul.children;
+        var first = ul.firstElementChild;
+        var last = ul.lastElementChild;
+
+        for (var i = 0; i < li.length; i++) {
+            li.index = i;
+            li[i].onmouseover = function() {
+                if (this == first || this == last) {
+                  this.className = 'side';
+                } else {
+                    this.className = 'focus';
+                    this.previousElementSibling.className = this.nextElementSibling.className = 'near';
+                    first.className = last.className = 'none';
+                   /* this.previousElementSibling.className = 'near';
+                    this.nextElementSibling.className ='near';
+                    first.className = 'none';
+                    last.className = 'none';*/
+                }
+            }
+            li[i].onmouseout = function(){
+              for(var i = 0; i<li.length; i++){
+                li[i].className = '';
+              }
+              first.className = last.className = 'none';
+              /*first.className = 'none';
+              last.className = 'none';*/
+            }
+        }
+    </script>
+
+</body>
+
+</html>
