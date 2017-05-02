@@ -2,7 +2,7 @@ var pageIndex = 0,
     preloadCount = 0;
 var loopPlayback = false,
     stopSwitch = true;
-var videoSwiper, casesSwiper, appStoreSwiper, aboutSwiper;
+var videoSwiper, casesSwiper, qualitySwiper, aboutSwiper;
 $(function() {
     // var m = document.location.href.toLowerCase().match(/#p(\d+)$/);
     // if (m != null) pageIndex = m[1] - 1;
@@ -95,14 +95,15 @@ function pageLoad() {
     });
     for (var i = 0; i < $(".video .swiper-slide").size(); i++) $(".video .guide").append('<a></a>');
     $(".video .guide a").eq(0).addClass("active");
+    $(".video .nth1, .video .nth2").append('<div class="shade"></div><div class="line"><u></u></div>');
     videoSwiper = new Swiper(".video .swiper-container", {
         loop: true,
-        autoplay: 5000,
+        //autoplay: 5000,
         grabCursor: true,
         nextButton: '.swiper-button-next',
         prevButton: '.swiper-button-prev',
         onSlideChangeStart: function() {
-            //resetVideoSwiperAnimation()
+            resetVideoSwiperAnimation()
         },
         onSlideChangeEnd: function() {
             $(".video .guide a").removeClass("active").eq(videoSwiper.activeLoopIndex).addClass("active");
@@ -114,11 +115,11 @@ function pageLoad() {
     });
     $('.swiper-button-prev').bind('click touchstart', function() {
         videoSwiper.swipePrev();
-        videoSwiper.startAutoplay();
+        //videoSwiper.startAutoplay();
     });
     $('.swiper-button-next').bind('click touchstart', function() {
         videoSwiper.swipeNext()
-        videoSwiper.startAutoplay();
+        //videoSwiper.startAutoplay();
     });
     videoSwiper.stopAutoplay();
     $(".video .guide a").bind("mouseover click touchstart", function(e) {
@@ -134,39 +135,48 @@ function pageLoad() {
         pageIndex = 1;
         pageSwitching()
     });
-    $(".business ul.items li").prepend('<u class="cl-bg"></u><u class="cl"></u><u class="cr"></u>');
+/*
+    $(".video .news").slide({ //新闻
+        mainCell: "ul",
+        autoPage: true,
+        effect: "top",
+        interTime: 3500,
+        autoPlay: true,
+        vis: 1
+    });*/
+
+    $(".business .box").append("<label></label>");
+    $(".business ul.items li").prepend('<u class="cl"></u><u class="cr"></u>');
     $(".cases .swiper-container").after('<a class="prev" href="javascript:;"></a><div class="swiper-container mini">' +
         $(".cases .swiper-container").html() + '</div><a class="next" href="javascript:;"></a>').after(
         '<div class="swiper-container xs">' + $(".cases .swiper-container").html() + '</div>');
     $(".cases .xs .swiper-slide img").addClass("img-responsive");
-    $(".cases .swiper-slide ").prepend('<div class="shade"></div>');
-
-
+    $(".cases .swiper-slide a").prepend('<div class="shade"><u></u></div>').append('<div class="bg"><u></u></div>');
+    if($('.cases .shade').length>0){
+        $('.cases .shade').css({'width':360});
+    }
+    
     casesSwiper = new Swiper(".cases .swiper-container.mini", {
         loop: true,
         autoplay: 5000,
         grabCursor: true,
         onTouchEnd: function() {
             casesSwiper.startAutoplay()
-
         }
     });
-    var casesSwiper2 = new Swiper(".cases .swiper-container", {
-        loop: true,
+    casesSwiper2 = new Swiper(".cases .swiper-container", {
         slidesPerView: 3,
-        grabCursor: true,
+        loop: true,
         //Enable 3D Flow
         tdFlow: {
-            rotate: 0,
-            stretch: 0,
-            depth: 200,
+            rotate: 10,
+            stretch: -50,
+            depth: 400,
             modifier: 1,
-            shadows: false
+            shadows: true
         },
         onTouchEnd: function() {
             casesSwiper2.startAutoplay()
-            $(".cases .swiper-slide").removeClass("on");
-            $(".cases .swiper-slide-active").next(".swiper-slide-visible").addClass("on");
         }
     });
     casesSwiper.stopAutoplay();
@@ -180,50 +190,78 @@ function pageLoad() {
         casesSwiper.swipeNext();
         casesSwiper.startAutoplay()
     });
-
-
-    function minSlide($dom,slideName) {
-
-        $($dom + " .swiper-container").after('<a class="prev" href="javascript:;"></a><div class="swiper-container mini">' +
-            $($dom + " .swiper-container").html() + '</div><a class="next" href="javascript:;"></a>');
-        $($dom + " .swiper-container .swiper-wrapper ul").each(function(i, item) {
-            var ulWidth = 0;
-            $(item).find("li").each(function(i, item) {
-                var liMarginLeft = $(this).css("margin-left").replace("px", "");
-                ulWidth += $(this).outerWidth() + liMarginLeft * 2
-            });
-            if ($.support.leadingWhitespace) $(item).width(ulWidth);
-            else $(item).width(ulWidth + 8)
+    $(".clients ul.items").after('<ul class="mini list-inline">' + $(".clients ul.items").html() + '</ul>');
+    $(".clients ul").prepend('<li class="bg all"></li><li class="bg one"></li>');
+    $(".clients ul.items li").not(".bg").bind("mouseover", function() {
+        var x = $(this).position();
+        $(this).parent().find(".one").show().css("top", x.top).css("left", x.left);
+        $(".clients ul.items li").removeClass("active");
+        $(this).addClass("active")
+    });
+    $(".clients ul.items").bind("mouseleave", function() {
+        $(".clients ul.items li").removeClass("active");
+        $(".clients ul.items li.bg.one").hide()
+    });
+    $(".quality .swiper-container").after('<a class="prev" href="javascript:;"></a><div class="swiper-container mini">' +
+        $(".quality .swiper-container").html() + '</div><a class="next" href="javascript:;"></a>');
+    $(".quality .swiper-container .swiper-wrapper ul").each(function(i, item) {
+        var ulWidth = 0;
+        $(item).find("li").each(function(i, item) {
+            var liMarginLeft = $(this).css("margin-left").replace("px", "");
+            ulWidth += $(this).outerWidth() + liMarginLeft * 2
         });
-        slideName = new Swiper($dom + " .swiper-container.mini", {
-            loop: true,
-            //autoplay: 5000,
-            grabCursor: true,
-            onTouchEnd: function() {
-                slideName.startAutoplay()
-            }
-        });
-        //slideName.stopAutoplay();
-        $($dom + " a.prev").bind("click touchstart", function(e) {
-            e.preventDefault();
-            slideName.swipePrev();
-            slideName.startAutoplay()
-        });
-        $($dom + " a.next").bind("click touchstart", function(e) {
-            e.preventDefault();
-            slideName.swipeNext();
-            slideName.startAutoplay()
-        });
-    }
-    minSlide(".app-store",appStoreSwiper);
-    minSlide(".aboutus",aboutSwiper);
+        if ($.support.leadingWhitespace) $(item).width(ulWidth);
+        else $(item).width(ulWidth + 8)
+    });
+    qualitySwiper = new Swiper(".quality .swiper-container.mini", {
+        loop: true,
+        autoplay: 5000,
+        grabCursor: true,
+        onTouchEnd: function() {
+            qualitySwiper.startAutoplay()
+        }
+    });
+    qualitySwiper.stopAutoplay();
+    $(".quality a.prev").bind("click touchstart", function(e) {
+        e.preventDefault();
+        qualitySwiper.swipePrev();
+        qualitySwiper.startAutoplay()
+    });
+    $(".quality a.next").bind("click touchstart", function(e) {
+        e.preventDefault();
+        qualitySwiper.swipeNext();
+        qualitySwiper.startAutoplay()
+    });
     $(".marketing").append('<div class="shade"></div>');
-    $(".marketing .swiper-slide").prepend('<u class="cl"></u><u class="cr"></u>');
-    $(".app-store .swiper-slide").prepend('<u class="cl"></u><u class="cr"></u>');
-
-
-
-
+    $(".marketing ul.items li").prepend('<u class="cl"></u><u class="cr"></u>');
+    var menu = $(".aboutus ul.menu");
+    menu.append('<li class="bg all"></li><li class="bg one"></li>');
+    menu.find("li.all").height(menu.height());
+    menu.find("li.one").height(menu.find("li:eq(0)").height());
+    $(".aboutus .exp").after('<div class="expBg"></div><div class="shade"></div>');
+    aboutSwiper = new Swiper(".aboutus .swiper-container.items", {
+        loop: true,
+        autoplay: 6000,
+        grabCursor: true,
+        onSlideChangeStart: function() {
+            var li = $(".aboutus ul.menu li").eq(aboutSwiper.activeLoopIndex);
+            var x = li.position();
+            li.parent().find(".one").css("top", x.top).css("left", x.left);
+            $(".aboutus ul.menu li").removeClass("active");
+            li.addClass("active")
+        },
+        onTouchEnd: function() {
+            aboutSwiper.startAutoplay()
+        }
+    });
+    aboutSwiper.stopAutoplay();
+    $(".aboutus ul.menu li").not(".bg").bind("mouseover click touchstart", function(e) {
+        e.preventDefault();
+        aboutSwiper.stopAutoplay();
+        aboutSwiper.swipeTo($(this).index())
+    }).bind("mouseout", function() {
+        aboutSwiper.startAutoplay()
+    }).eq(0).addClass("active");
     $(".contact .box").append('<div class="below"><i></i></div>');
     $(".contact .box .wechat img").addClass("img-responsive");
     $(window).bind("resize", function(e) {
@@ -256,7 +294,9 @@ function pageLoad() {
             pageSwitching()
         })
     }
-
+    /*$("body").append(
+        '<script type="text/javascript"  data-lxb-uid="989741" data-lxb-gid="2944" src="http://lxbjs.baidu.com/api/asset/api.js?t=' +
+        new Date().getTime() + '" charset="utf-8"></scr' + 'ipt>')*/
 }
 
 function initLayout() {
@@ -265,17 +305,33 @@ function initLayout() {
     var hhFixed = 70;
     if (hhNormal == 42) hhFixed = 60;
     else if (hhNormal == 0) hhFixed = 0;
-    var refTop = hhNormal;
+/*     refTop = $(".video .news").offset().top;
+    console.log(refTop);
+    if (refTop == 0) refTop = $(".video .guide").offset().top;*/
+    var refTop =  hhNormal;
     $(".video .swiper-slide").each(function(i, item) {
-        if ($(item).hasClass("nth5")) {
-            var box = $(".video .box");
-            var boxTop = parseInt(($(window).height() - box.height() + hhFixed) / 2);
-            if ($(window).height() < 800) {
-                $(item).find(".box").css("top", boxTop - box.height() / 2);
-            } else {
-                $(item).find(".box").css("top", boxTop - box.height());
-            }
-
+        if ($(item).hasClass("nth1")) {
+            var boxMt = parseInt((refTop - $(item).find(".left").height()) / 2);
+            var boxWidth = $(item).find(".left").width() + $(item).find(".right").width();
+            $(item).find(".box").css("margin-top", boxMt).css("width", boxWidth);
+            $(item).find(".shade").css("top", boxMt - 711)
+        } /*else if ($(item).hasClass("nth2")) {
+            var boxMt = parseInt((refTop - $(item).find(".box").height()) / 2);
+            $(item).find(".box").css("top", boxMt)
+        } else if ($(item).hasClass("nth3")) {
+            boxHeight = 235;
+            if ($(item).find(".box .bottom").css("font-size") == "12px") boxHeight = 134;
+            var boxMt = parseInt((refTop - boxHeight) / 2);
+            $(item).find(".box").css("margin-top", 10 + '%')
+        } else if ($(item).hasClass("nth4")) {
+            var boxMt = parseInt((refTop - $(item).find(".box").height()) / 2);
+            $(item).find(".box").css("margin-top", boxMt)
+        } else */
+        if($(item).hasClass("nth5")){
+            boxHeight = 235;
+            if ($(item).find(".box .bottom").css("font-size") == "12px") boxHeight = 134;
+            var boxMt = parseInt((refTop - boxHeight) / 2);
+            $(item).find(".box").css("margin-top", 10 + '%')
         }
     });
     var items = $(".business ul.items li");
@@ -294,7 +350,12 @@ function initLayout() {
     box = $(".cases .box");
     boxTop = parseInt(($(window).height() - box.height() + hhFixed) / 2);
     box.css("top", boxTop);
-
+    box = $(".clients .box");
+    boxTop = parseInt(($(window).height() - box.height() + hhFixed) / 2);
+    box.css("top", boxTop);
+    box = $(".quality .box");
+    boxTop = parseInt(($(window).height() - box.height() + hhFixed) / 2);
+    box.css("top", boxTop);
     items = $(".marketing ul.items li");
     if ($(window).width() > 1000) {
         var itemMarginLeft = items.css("margin-left").replace("px", "");
@@ -305,36 +366,12 @@ function initLayout() {
     boxTop = parseInt(($(window).height() - box.height() + hhFixed) / 2);
     box.css("top", boxTop);
     $(".marketing .shade").height($(window).height());
-
-    items = $(".app-store .items .swiper-slide");
-    if ($(window).width() > 1000) {
-        var itemMarginLeft = items.css("margin-left").replace("px", "");
-        var width = items.outerWidth() * items.size() + itemMarginLeft * 2 * items.size() + 4 * (items.size() - 1) + 2;
-        $(".app-store .items").width(width)
-    }
-    box = $(".app-store .box");
-    boxTop = parseInt(($(window).height() - box.height() + hhFixed) / 2);
-    
-    if($(window).height() <= 375){
-        boxTop = parseInt(($(window).height() - box.height() + hhFixed + 30) );
-        console.log(boxTop)
-        box.css("top", boxTop);
-    }else{
-        box.css("top", boxTop);
-    }
-   
-    $(".app-store .shade").height($(window).height());
-
-    items = $(".aboutus .items .swiper-slide");
-    if ($(window).width() > 1000) {
-        var itemMarginLeft = items.css("margin-left").replace("px", "");
-        var width = items.outerWidth() * items.size() + itemMarginLeft * 2 * items.size() + 4 * (items.size() - 1) + 2;
-        $(".aboutus .items").width(width)
-    }
-    box = $(".aboutus .box");
-    boxTop = parseInt(($(window).height() - box.height() + hhFixed) / 2);
-    box.css("top", boxTop);
-
+    items = $(".aboutus .items");
+    itemsTop = parseInt(($(window).height() - items.height() + hhFixed - $(".aboutus table.exp").height()) / 2);
+    items.css("top", itemsTop);
+    var li = $(".aboutus ul.menu li").eq(aboutSwiper.activeLoopIndex);
+    var x = li.position();
+    li.parent().find(".one").css("top", x.top).css("left", x.left);
     box = $(".contact .box");
     boxTop = parseInt(($(window).height() - box.height() + hhFixed) / 2);
     box.css("top", boxTop)
@@ -351,10 +388,22 @@ function videoSwiperAnimation() {
     }
 }
 
-
+function resetVideoSwiperAnimation() {
+    if (!loopPlayback) return;
+    $(".video .swiper-slide").removeClass("active");
+    $(".video .swiper-container .nth2 .box").css("left", -350)
+}
 
 function sectionAnimation() {
-
+    if (pageIndex == 0) {
+        $("header .cert").addClass("active");
+        videoSwiper.startAutoplay();
+        videoSwiperAnimation();
+        return
+    } else {
+        $("header .cert").removeClass("active");
+        videoSwiper.stopAutoplay()
+    }
     var e = $("body>section").eq(pageIndex).addClass("active");
     if (pageIndex == 2) {
         var prevBtn = $(".cases a.prev");
@@ -365,26 +414,27 @@ function sectionAnimation() {
             nextBtn.css("top", btnTop)
         }
         casesSwiper.startAutoplay()
+    } else if (pageIndex == 3) {
+        var clientsRow = parseInt($(".clients ul.items").height() / $(".clients ul.items li.one").height());
+        var clientsCol = parseInt($(".clients ul.items").width() / $(".clients ul.items li.one").width());
+        $(".clients ul.items li:gt(1)").each(function(i, item) {
+            if ((i + 1) % clientsCol != 0) $(this).addClass("r");
+            else $(this).removeClass("r");
+            if (i < clientsCol * (clientsRow - 1)) $(this).addClass("b");
+            else $(this).removeClass("b")
+        })
     } else if (pageIndex == 4) {
-        prevBtn = $(".app-store a.prev");
-        nextBtn = $(".app-store a.next");
+        prevBtn = $(".quality a.prev");
+        nextBtn = $(".quality a.next");
         if (prevBtn.css("display") == "block") {
-            var btnTop = $(".app-store .mini").position().top + 140;
+            var btnTop = $(".quality .mini").position().top + 140;
             prevBtn.css("top", btnTop);
             nextBtn.css("top", btnTop)
         }
-        //appStoreSwiper.startAutoplay()
-    }else if (pageIndex == 5) {
-        prevBtn = $(".aboutus a.prev");
-        nextBtn = $(".aboutus a.next");
-        if (prevBtn.css("display") == "block") {
-            var btnTop = $(".aboutus .mini").position().top + 140;
-            prevBtn.css("top", btnTop);
-            nextBtn.css("top", btnTop)
-        }
-        //aboutSwiper.startAutoplay()
+        qualitySwiper.startAutoplay()
     }
-
+    if (pageIndex == 6) aboutSwiper.startAutoplay();
+    else aboutSwiper.stopAutoplay()
 }
 
 function resetSectionAnimation() {
@@ -409,7 +459,7 @@ function pageSwitching() {
     }, 300, "swing", function() {
         if (lock) return;
         else lock = true;
-        //resetVideoSwiperAnimation();
+        resetVideoSwiperAnimation();
         resetSectionAnimation();
         sectionAnimation();
         stopSwitch = false
