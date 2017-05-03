@@ -1,0 +1,215 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>QQ音乐给您发来一张邀请函</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta itemprop="name" content="打开看看，这个邀请函不太一般哦……">
+    <meta itemprop="description" content="打开看看，这个邀请函不太一般哦……">
+    <meta http-equiv="x-dns-prefetch-control" content="on" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="full-screen" content="true" />
+    <meta name="screen-orientation" content="portrait" />
+    <meta name="x5-fullscreen" content="true" />
+    <meta name="360-fullscreen" content="true" />
+    <meta name="copyright" content="Copyright (c) 2015." />
+    <link rel="stylesheet" href="css/style.css" />
+    <script>
+        if (/Android (\d+\.\d+)/.test(navigator.userAgent)) {
+            var version = parseFloat(RegExp.$1)
+            if (version > 2.3) {
+                var phoneScale = parseInt(window.screen.width) / 750
+                document.write('<meta name="viewport" content="width=750,minimum-scale=' + phoneScale + ',maximum-scale=' + phoneScale + ',target-densitydpi=device-dpi">')
+            } else {
+                document.write('<meta name="viewport" content="width=750,target-densitydpi=device-dpi">')
+            }
+        } else {
+            document.write('<meta name="viewport" content="width=750,user-scalable=no,target-densitydpi=device-dpi,minimal-ui">')
+        }
+    </script>
+    <script src="script/lib/iphone-inline-video.browser.js"></script>
+    <script src="script/lib/zepto.js"></script>
+    <script type="text/javascript" src="http://tencentcdn.vkdvip.com/js/weixin/jweixin-1.0.0.js"></script>
+    <script>
+        share();
+
+        var shareData = '';
+        var url = document.location.toString();
+
+        if (url.indexOf("http://www.") < 0)
+           // location.href = url.replace('http://', 'http://www.');
+        //console.log(url);
+        function share() {
+            $.ajax({
+                type: "POST",
+                url: "D_Video.php",
+                dataType: 'json',
+                data: {
+                    type: 0,
+                    url: document.location.toString()
+                },
+                success: function(msg) {
+                    shareData = msg;
+                    //console.log(shareData);
+                    wx.config({
+                        debug: false,
+                        appId: shareData.appId,
+                        timestamp: shareData.timestamp,
+                        nonceStr: shareData.nonceStr,
+                        signature: shareData.signature,
+                        jsApiList: [
+                            'onMenuShareTimeline',
+                            'onMenuShareAppMessage',
+                            'showMenuItems'
+                        ]
+                    });
+
+
+                }
+            });
+        }
+
+
+        wx.ready(function() {
+
+            wx.showMenuItems({
+                menuList: [
+                    'menuItem:readMode', // 阅读模式
+                    'menuItem:share:timeline', // 分享到朋友圈
+                    'menuItem:copyUrl' // 复制链接
+                ],
+                success: function(res) {
+                    //alert('已显示“阅读模式”，“分享到朋友圈”，“复制链接”等按钮');
+                },
+                fail: function(res) {
+                    //alert(JSON.stringify(res));
+                }
+            });
+
+            // 在这里调用 API
+            wx.onMenuShareTimeline({
+                title: 'QQ音乐给您发来一张邀请函', // 分享标题
+                link: 'http://www.tencent-blackboard.com/qqlive/index.html', // 分享链接
+                imgUrl: 'http://www.tencent-blackboard.com/qqlive/images/share.jpg', // 分享图标
+                success: function() {
+                    alert("分享成功");
+                },
+                cancel: function() {
+                    alert("分享失败");
+                }
+            });
+
+            //分享给朋友
+            wx.onMenuShareAppMessage({
+                title: 'QQ音乐给您发来一张邀请函', // 分享标题
+                desc: '打开看看，这个邀请函不太一般哦……', // 分享描述
+                link: 'http://www.tencent-blackboard.com/qqlive/index.html', // 分享链接
+                imgUrl: 'http://www.tencent-blackboard.com/qqlive/images/share.jpg', // 分享图标
+                type: '', // 分享类型,music、video或link，不填默认为link
+                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                success: function() {
+                    alert("分享成功");
+                },
+                cancel: function() {
+                    alert("分享失败");
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+    <div class="m-wrap">
+
+        <!-- S 加载页 -->
+        <div class="ct_loading" id="J_loading">
+            <div class="ct_loading_logo">
+                <div class="ct_loading_k"></div>
+                <div class="ct_loading_round">
+                    <div class="ct_loading_water hide ct_loading_progress" id="J_loading_progress" style="-webkit-transform:translateY(30%);">
+                        <div class="ct_loading_water__cont"></div>
+                    </div>
+                </div>
+                <div class="ct_loading_symbol"></div>
+            </div>
+            <div class="ct_loading_text">正在加载中...</div>
+        </div>
+
+        <div class="m-start-page">
+            <div class="ro-end">
+                <div class="icon-play"></div>
+            </div>
+        </div>
+        <div class="m-video-page " id="videoWrap">
+            <div class="m1 ms ">
+                <video width="750" height="1280" id="video0" webkit-playsinline playsinline x-webkit-airplay="true" data-index="0" airplay="allow" x5-video-player-type="h5" preload="auto" src="video/act1.mp4"></video>
+            </div>
+            <div class="m2 ms ">
+                <video width="750" height="1280" id="video1" webkit-playsinline playsinline x-webkit-airplay="true" data-index="1" airplay="allow" x5-video-player-type="h5" preload="auto" src="video/act2.mp4"></video>
+            </div>
+            <div class="m3 ms ">
+                <video width="750" height="1280" id="video2" webkit-playsinline playsinline x-webkit-airplay="true" data-index="2" airplay="allow" x5-video-player-type="h5" preload="auto" src="video/act3.mp4"></video>
+            </div>
+            <div class="m4 ms ">
+                <video width="750" height="1280" id="video3" webkit-playsinline playsinline x-webkit-airplay="true" data-index="3" airplay="allow" x5-video-player-type="h5" preload="auto" src="video/act4.mp4"></video>
+            </div>
+            <div class="m5 ms ">
+                <video width="750" height="1280" id="video4" webkit-playsinline playsinline x-webkit-airplay="true" data-index="4" airplay="allow" x5-video-player-type="h5" preload="auto" src="video/act5.mp4"></video>
+            </div>
+            <div class="m6 ms ">
+                <video width="750" height="1280" id="video5" webkit-playsinline playsinline x-webkit-airplay="true" data-index="5" airplay="allow" x5-video-player-type="h5" preload="auto" src="video/act6.mp4"></video>
+            </div>
+        </div>
+
+        <div class="m-choose-master one">
+            <div class="text-bg ">
+                <div class="btn-help1 ns-btn " data-type="yes" data-index="1"></div>
+            </div>
+        </div>
+        <div class="m-choose-master two">
+            <div class="text-bg ">
+                <div class="btn-help2 ns-btn " data-type="yes" data-index="2"></div>
+            </div>
+        </div>
+        <div class="m-choose-master three">
+            <div class="text-bg ">
+                <div class="btn-help3 ns-btn " data-type="yes" data-index="3"></div>
+            </div>
+        </div>
+        <div class="m-choose-master four">
+            <div class="text-bg ">
+                <div class="btn-help4 ns-btn " data-type="yes" data-index="4"></div>
+            </div>
+        </div>
+        <div class="m-choose-master five">
+            <div class="text-bg ">
+                <div class="btn-help5 ns-btn " data-type="yes" data-index="5"></div>
+            </div>
+        </div>
+
+        <div class="m-end-page ">
+            <div class="end-bg">
+                <div class="code "></div>
+                <div class="btn-align "></div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+    </script>
+    <script src="script/lib/imgLoader.js "></script>
+    <script src="script/main/main.js "></script>
+
+</body>
+<script src="https://s11.cnzz.com/z_stat.php?id=1261037673&web_id=1261037673" language="JavaScript"></script>
+<script type="text/javascript ">
+    $("#cnzz_stat_icon_1261037673 ").hide();
+</script>
+
+</html>

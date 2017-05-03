@@ -1,13 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 </head>
+
 <body>
-  <input id="btn" type="button" >
-  <ul></ul>
+    <input id="btn" type="button" value="添加元素">
+    <ul id="ul"></ul>
 </body>
+<script>
+    var btn = document.getElementById('btn');
+    var ul = document.getElementById('ul');
+    var html = '';
+    var num = 0;
+
+    /*
+  
+    */
+
+    btn.onclick = function() {
+        num++;
+        var li = document.createElement('li');
+        li.innerHTML = num;
+        ul.appendChild(li);
+    }
+</script>
+
 </html>
