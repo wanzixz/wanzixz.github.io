@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>表格</title>
+</head>
+<body>
+  <table id="box"  border="1">
+    <thead>
+      <tr>
+        <th>头一</th>
+        <th>头二</th>
+        <th>头三</th>
+        <th>头四</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>内容一</td>
+        <td>内容二</td>
+        <td>内容三</td>
+        <td>内容四</td>
+      </tr>
+       <tr>
+        <td>内容一</td>
+        <td>内容二</td>
+        <td>内容三</td>
+        <td>内容四</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+       <td> 统计一</td>
+        <td>统计二</td>
+        <td>统计三</td>
+        <td>统计四</td>
+      </tr>
+    </tfoot>
+  </table>
+</body>
+<script>
+  var box = document.getElementById('box');
+
+  var Atr = box.getElementsByTagName('tr');
+
+  box.tHead.style.borderColor = 'red';
+
+  box.tFoot.style.background = '#ccc'
+  box.tBodies[0].rows[0].style.background = 'yellow';
+  box.tBodies[0].rows[1].cells[1].style.background = 'pink'
+
+  box.tFoot.rows[0].style.background = 'blue'
+  console.log(box.tBodies);
+
+  
+
+
+
+</script>
+</html>
