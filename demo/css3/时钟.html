@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>时间</title>
+  <style id="ocss">
+    #wrap {position:relative; width: 200px; height: 200px; margin:100px auto;border:1px solid #000;  border-radius: 200px; overflow: hidden;}
+    #wrap ul {margin: 0; padding: 0; width:200px; height: 200px; position: relative;list-style: none;}
+    #wrap ul li{width: 2px; height: 6px; background: #000; position: absolute; top:0; left: 99px;-webkit-transform-origin:center 100px ;}
+/*    #wrap ul li:nth-of-type(1) { -webkit-transform:rotate(0);}
+    #wrap ul li:nth-of-type(2) { -webkit-transform:rotate(6deg);}
+    #wrap ul li:nth-of-type(3) { -webkit-transform:rotate(12deg);}
+    #wrap ul li:nth-of-type(4) { -webkit-transform:rotate(18deg);}
+    #wrap ul li:nth-of-type(5) { -webkit-transform:rotate(24deg);}
+    #wrap ul li:nth-of-type(6) { -webkit-transform:rotate(30deg);}
+    #wrap ul li:nth-of-type(7) { -webkit-transform:rotate(36deg);}
+    #wrap ul li:nth-of-type(8) { -webkit-transform:rotate(42deg);}*/
+    #wrap ul li:nth-of-type(5n+1) { height: 12px;}
+    #hour { width:6px; height: 45px;  background: #000; position: absolute; top:55px; left:97px;-webkit-transform-origin:center 45px;}
+    #min { width:4px; height: 55px;  background: #ccc; position: absolute; top:45px; left:98px; -webkit-transform-origin:center 55px;}
+    #sec { width:2px; height: 70px;  background: #f00; position: absolute; top:30px; left:99px; -webkit-transform-origin:center 70px;}
+    #dot { width: 10px; height: 10px; background: #000; border-radius: 10px; box-shadow: 0 0 0 1px #fff,0 0 0 2px #f00; position: absolute; top:95px; left: 95px;}
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <ul id ='list'></ul>
+    <div id="hour"></div>
+    <div id="min"></div>
+    <div id="sec"></div>
+    <div id="dot"></div>
+  </div>
+</body>
+<script>
+  var oCss = document.getElementById('ocss');
+  var cssStr = '';
+  var ul = document.getElementById('list');
+  var lis = '';
+
+  var sec = document.getElementById('sec');
+  var min = document.getElementById('min') ;
+  var hour = document.getElementById('hour') ;
+
+  for(var i = 0; i<60; i++){
+    cssStr += '#wrap ul li:nth-of-type('+ (i+1) +') { -webkit-transform:rotate('+ i*6 +'deg);}';
+    lis += '<li></li>';
+  }
+
+  oCss.innerHTML += cssStr;
+  ul.innerHTML = lis;
+
+  setInterval(getTime,1000);
+  function getTime(){
+     var oDate = new Date();
+    var iSec = oDate.getSeconds();
+    var iMin = oDate.getMinutes() + iSec/60;
+    var iHour = oDate.getHours() + iMin/60;
+    hour.style.WebkitTransform = 'rotate('+ (iHour*30)  +'deg)';
+    min.style.WebkitTransform = 'rotate('+ (iMin*6) +'deg)';
+    sec.style.WebkitTransform = 'rotate('+ (iSec*6) +'deg)';
+
+  }
+ 
+</script>
+</html>
