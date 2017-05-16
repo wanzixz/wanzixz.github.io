@@ -24,7 +24,12 @@
 	        v-on:keyup.enter="addTodo"
          />
         <ul class="task-count">
-            <li>个任务未完成</li>
+            <li>{{
+                    list.filter(function(item){
+                        return !item.isChecked
+                    }).length
+                }}
+            个任务未完成</li>
             <li class="action">
                 <a class="active" href="#">所有任务</a>
                 <a href="#">未完成的任务</a>
@@ -36,13 +41,21 @@
 
             <span class="no-task-tip" v-show="!list.length">还没有添加任何任务</span>
             <ul class="todo-list">
-                <li class="todo" :class="{ completed : item.isChecked}" v-for="item in list">
+                <li class="todo" :class="{ completed : item.isChecked,editing:item === edtorTodos}" v-for="item in list">
                     <div class="view">
                         <input v-model="item.isChecked" class="toggle" type="checkbox" />
-                        <label >{{ item.title }}</label>
+                        <label @dblclick="edtorTodo(item)">{{ item.title }}</label>
                         <button class="destroy" @click="deleteTodo(item)"></button>
                     </div>
-                    <input class="edit" type="text" />
+                    <input 
+                    class="edit" 
+                    type="text" 
+                    v-model="item.title"
+                    v-focus="item === edtorTodos"
+                    @blur="edtorTodoed()"
+                    @keyup.13="edtorTodoed()"
+                    @keyup.esc="cancelTodo(item)"
+                    />
                 </li>
             </ul>
         </div>
