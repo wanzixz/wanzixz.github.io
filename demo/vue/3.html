@@ -24,12 +24,7 @@
 	        v-on:keyup.enter="addTodo"
          />
         <ul class="task-count">
-            <li>{{
-                    list.filter(function(item){
-                        return !item.isChecked
-                    }).length
-                }}
-            个任务未完成</li>
+            <li>{{ noChecked }}个任务未完成</li>
             <li class="action">
                 <a class="active" href="#">所有任务</a>
                 <a href="#">未完成的任务</a>
