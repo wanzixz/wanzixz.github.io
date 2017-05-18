@@ -26,9 +26,9 @@
         <ul class="task-count">
             <li>{{ noChecked }}个任务未完成</li>
             <li class="action">
-                <a class="active" href="#">所有任务</a>
-                <a href="#">未完成的任务</a>
-                <a href="#">完成的任务</a>
+                <a href="#all" :class="{active: selectItem==='all' }">所有任务</a>
+                <a href="#unfinished" :class="{active: selectItem==='unfinished' }">未完成的任务</a>
+                <a href="#finished" :class="{active: selectItem==='finished' }">完成的任务</a>
             </li>
         </ul>
         <h3 class="big-title">任务列表：</h3>
@@ -36,7 +36,7 @@
 
             <span class="no-task-tip" v-show="!list.length">还没有添加任何任务</span>
             <ul class="todo-list">
-                <li class="todo" :class="{ completed : item.isChecked,editing:item === edtorTodos}" v-for="item in list">
+                <li class="todo" :class="{ completed : item.isChecked,editing:item === edtorTodos}" v-for="item in filteredList">
                     <div class="view">
                         <input v-model="item.isChecked" class="toggle" type="checkbox" />
                         <label @dblclick="edtorTodo(item)">{{ item.title }}</label>
@@ -47,8 +47,8 @@
                     type="text" 
                     v-model="item.title"
                     v-focus="item === edtorTodos"
-                    @blur="edtorTodoed()"
-                    @keyup.13="edtorTodoed()"
+                    @blur="edtorTodoed(item)"
+                    @keyup.13="edtorTodoed(item)"
                     @keyup.esc="cancelTodo(item)"
                     />
                 </li>
