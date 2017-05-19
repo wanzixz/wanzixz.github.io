@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <ul id="tags">
+        <li v-for="value in tags">{{ value }}</li>
+    </ul>
+</body>
+<script>
+    new Vue({
+        el: '#tags',
+        data: {
+            tags: ['js', 'mvvm', 'vue.js']
+        }
+    })
+</script>
+
+</html>

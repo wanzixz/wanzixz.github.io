@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.wrap{ width: 100px; height: 100px; padding: 100px; border: 5px solid #000; margin: 100px auto;-webkit-perspective: 600px; -webkit-transform: scale(1); /* -webkit-perspective-origin: left bottom;  */}
+		.box{ width: 100px; height: 100px; background: red; position: relative; -webkit-transform-style: preserve-3d; transition: 3s; -webkit-transform-origin: center center 50px;  }
+		.box div { width: 100px; height: 100px; position: absolute;color: #fff; font-size: 20px; text-align: center; line-height: 100px;  opacity: 0.6 }
+		.box div:nth-of-type(1){ left: 0; top: -100px; background: #9c0; -webkit-transform-origin: bottom; -webkit-transform: rotateX(-90deg);  }
+		.box div:nth-of-type(2){ left: -100px; top: 0; background: #cf3;-webkit-transform-origin: right; -webkit-transform: rotateY(90deg); }
+		.box div:nth-of-type(3){ left: 0; top: 0; background: #ccf; -webkit-transform: rotateX(180deg); }
+		.box div:nth-of-type(4){ left: 100px; top: 0; background: #0c9; -webkit-transform-origin: left; -webkit-transform: rotateY(-90deg); }
+		.box div:nth-of-type(5){ left: 0; top: 100px; background: #69c; -webkit-transform-origin: top; -webkit-transform: rotateX(90deg); }
+		.box div:nth-of-type(6){ left: 0; top: 0; background: #f0c; -webkit-transform-origin: center; -webkit-transform: translateZ(100px); }
+		.wrap:hover .box{ -webkit-transform: rotateX(180deg); }
+	</style>
+</head>
+<body>
+
+<div class="wrap">
+	<div class="box">
+		<div>1</div>
+		<div>2</div>
+		<div>3</div>
+		<div>4</div>
+		<div>5</div>
+		<div>6</div>
+	</div>
+</div>
+	
+</body>
+</html>
