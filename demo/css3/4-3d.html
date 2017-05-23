@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>animate</title>
+    <style>
+        @-webkit-keyframes move {
+            0% {
+                left: 0;
+            }
+            100% {
+                left: -500px;
+            }
+        }
+        
+        .box {
+            width: 500px;
+            height: 100px;
+            border: 1px solid #000;
+            position: relative;
+            margin: 100px auto;
+            overflow: hidden;
+        }
+        
+        #list {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            width: 200%;
+            -webkit-animation: 6s move infinite linear;
+        }
+        
+        #list:hover {
+            -webkit-animation-play-state: paused;
+        }
+        
+        #list li {
+            width: 98px;
+            height: 98px;
+            background: black;
+            float: left;
+            border: 1px solid #fff;
+            font: 30px/98px arial;
+            color: #fff;
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div>
+        <div class="box">
+            <ul id="list">
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+            </ul>
+        </div>
+    </div>
+</body>
+<script>
+    var list = document.getElementById('list');
+    var lis = list.getElementsByTagName('li');
+
+    cloneDom(lis, list);
+
+    function cloneDom(arrDom, targetObj) {  /* 克隆ul的子节点函数*/
+        var len = arrDom.length;
+        var copyLi = '';
+        for (var i = 0; i < len; i++) {
+            copyLi = arrDom[i].cloneNode(true);
+            if (i < len) {      //如果i大于len的长度，就停止增加节点。必须要做此判断否则会死循环
+                targetObj.appendChild(copyLi);
+            }
+        }
+    }
+
+
+</script>
+
+</html>

@@ -45,6 +45,7 @@
 	var aLi = null;
 	var sCss = '';
 	var iLiw =50;
+	var iNow = 0;
 	var iZindex = 0;
 	var iLength = oPicList.clientWidth/iLiw;
 	for(var i =0; i<iLength;i++){
@@ -60,8 +61,12 @@
 		(function(a){
 			aBtns[a].onclick = function(){
 				for(var i= 0; i <aLi.length;i++){
-					aLi[i].style.WebkitTransform = "rotateX(-"+a*90+"deg)";
+					aLi[i].style.transition = '0.5s ' + i*50 +'ms';
+					aLi[i].style.WebkitTransform = "rotateX("+a*90+"deg)";
 				}
+				aBtns[iNow].className = '';
+				this.className="active";
+				iNow = a;
 			}
 		})(i)
 	}
