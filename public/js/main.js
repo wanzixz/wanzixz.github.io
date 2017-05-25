@@ -1,6 +1,7 @@
 
 var main = $('.content-wrap');
 var duoshuoQuery = { short_name: "zlmark", theme:'none'};
+var isComment = false;
 
 // NProgress
 NProgress.configure({ showSpinner: false });
@@ -36,19 +37,25 @@ $(document).on({
     },
     'pjax:complete':function(){
       $('#container').fadeTo(700,1); 
+      comment();
+       isComment = true;
     }
 });
 
+if(comment) comment()
 //comment
-var timer = setInterval(function(){
-  if ( $('.ds-thread, .ds-recent-comments').length > 0 ) { 
-    if (typeof DUOSHUO !== 'undefined') {
-      DUOSHUO.EmbedThread('.ds-thread');
-      clearInterval(timer);
-    }else {
-      $.getScript("//static.duoshuo.com/embed.js");
-      clearInterval(timer);
-    }
+function comment(){
+    if ( $('.ds-thread, .ds-recent-comments').length > 0 ) { 
+    var timer = setInterval(function(){
+        if (typeof DUOSHUO !== 'undefined') {
+          DUOSHUO.EmbedThread('.ds-thread');
+          clearInterval(timer);
+        }else {
+          $.getScript("//static.duoshuo.com/embed.js");
+          clearInterval(timer);
+        }
+    },1000)
   }
-},1000)
+}
+
 
