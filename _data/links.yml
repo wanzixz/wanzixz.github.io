@@ -1,0 +1,21 @@
+- title: 个人相关
+  colors: e67e22
+  data:
+    - name: wanzixz
+      url: http://github.com/wanzixz
+      desc: github
+    - name: zlmark
+      url: http://blog.zlmark.com/
+      desc: blog
+
+- title: 收藏链接
+  colors: 42bd1b
+  data:
+    - name: 白树
+      url: http://peunzhang.cnblogs.com/
+
+- title: 其它
+  colors: 
+  data:
+      - name: web标准化交流会
+        url: http://w3ctech.com/

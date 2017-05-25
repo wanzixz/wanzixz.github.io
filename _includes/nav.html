@@ -15,6 +15,7 @@
                         <li class="{% if page.catepage %}nav-current{% endif %}"><a  href="{{ "/pages/categories.html"}}">{{ site.locals.post }}</a></li>
                         <li class="{% if page.tagspage | page.postpage | page.siglepage %}nav-current{% endif %}"><a href="{{ "/pages/tags.html" }}">{{ site.locals.tags }}</a></li>
                         <li class="{% if page.archivepage %}nav-current{% endif %}"><a href="{{ "/pages/archive.html" }}">{{ site.locals.archive }}</a></li>
+                        <li class="{% if page.linkspage %}nav-current{% endif %}" ><a  href="{{"/pages/links.html"}}">{{ site.locals.links }}</a></li>
                         <li class="{% if page.aboutpage %}nav-current{% endif %}" ><a  href="{{"/pages/page.html"}}">{{ site.locals.about }}</a></li>
                     </ul>
                 </div>

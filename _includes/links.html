@@ -1,0 +1,13 @@
+<dl class="links">
+{% for node in include.nodes %}
+	<dt  {% if node.colors %} style="color:#{{ node.colors}}" {% endif %}>— {{ node.title }}</dt>
+	{% for item in node.data %}
+	  <dd>
+    		<a href="{{ item.url }}" target="_blank">{{ item.name }}</a>
+	       {% if item.desc %}
+	    		({{ item.desc }})
+	      {% endif %}
+	  </dd>
+	  {% endfor %}
+{% endfor %}
+</dl>

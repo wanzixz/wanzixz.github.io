@@ -253,6 +253,10 @@ box-sizing: border-box; }
 .archive-info{border-top:4px solid #EFEFEF;}
 #content .mod-encourage img{display:inline-block;}
 
+/* links*/ 
+.links dt{ padding:20px 0 5px;}
+.links dd{ padding:0 0 5px 25px; }
+
 @media (min-width: 768px){
     .nav-toggle-button {
         display: none;

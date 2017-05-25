@@ -28,14 +28,14 @@ archivepage: true
       </ul>
     {% else %}
       {% if this_year != next_year %}
-        </ul>
-        <legend id="{{next_year}}-{{next_month}}">{{next_year}}年-{{next_month}}月</legend>
         <ul>
+        <legend id="{{next_year}}-{{next_month}}">{{next_year}}年-{{next_month}}月</legend>
+        </ul>
       {% else %}    
         {% if this_month != next_month %}
-        </ul>
-        <legend id="{{next_year}}-{{next_month}}">{{next_year}}年-{{next_month}}月</legend>
         <ul>
+        <legend id="{{next_year}}-{{next_month}}">{{next_year}}年-{{next_month}}月</legend>
+        </ul>
         {% endif %}
       {% endif %}
     {% endif %}
