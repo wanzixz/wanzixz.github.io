@@ -46,15 +46,8 @@ if(comment) comment()
 //comment
 function comment(){
     if ( $('.ds-thread, .ds-recent-comments').length > 0 ) { 
-    var timer = setInterval(function(){
-        if (typeof DUOSHUO !== 'undefined') {
-          DUOSHUO.EmbedThread('.ds-thread');
-          clearInterval(timer);
-        }else {
-          $.getScript("//static.duoshuo.com/embed.js");
-          clearInterval(timer);
-        }
-    },1000)
+        if (typeof DUOSHUO !== 'undefined') DUOSHUO.EmbedThread('.ds-thread');
+        else$.getScript("//static.duoshuo.com/embed.js");
   }
 }
 
