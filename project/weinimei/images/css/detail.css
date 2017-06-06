@@ -147,3 +147,44 @@ button.input-search-close{padding:0;cursor:pointer;background:0 0;border:0}
 }
 .met-product .widget-title{padding:12px 20px;font-size:16px;text-align:center;margin-top:0;color:#37474f;text-transform:capitalize;}
 .widget .cover{width:100%;}
+
+/* 新闻 */
+.met-news-body { background: #f2f2f2; }
+.met-news-right{  box-shadow: 0 1px 1px rgba(0,0,0,.05);}
+.met-news-right .new-item{margin-top:15px;overflow:hidden;zoom:1;}
+.met-news-right .met-news-list{ background: #fff;
+    padding: 30px; }
+.met-news-right  .new-item{
+    border-bottom: 1px solid #f0f2f5;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+}
+.met-news-right .new-item:first-child{margin-top:0;}
+.met-news-right .new-left,
+.met-news-right .new-right{display:table-cell;vertical-align:top;}
+.met-news-right .new-left{padding-right:20px;}
+.met-news-right .new-img{width:160px;}
+.met-news-right .new-heading{position:relative;margin-top:0;margin-bottom:5px;}
+.met-news-right .new-heading a{text-decoration:none;}
+.met-news-right .new-heading:before{position:absolute;content:"";width:10px;height:1px;background-color:#3C3C3C;bottom:0px;transition:all 0.6s cubic-bezier(0.215,0.61,0.355,1) 0s;}
+.met-news-right .new-heading:hover:before{width:100%;transition:all 0.6s cubic-bezier(0.215,0.61,0.355,1) 0s;}
+.met-news-right .new-time{display:block;font-weight:300;height:30px;color:#999;font-size:16px;}
+.met-news-right  .new-heading a{border-bottom:1px solid #EFEFEF;font-size:16px;color:#595959;display:block;padding-bottom:20px;}
+.met-news-right p.des{margin-bottom:5px;}
+.met-news-bar{background:#fff;margin-left:30px;padding:20px}
+@media (max-width:991px){
+	.met-news-bar{margin-left:0;margin-top:30px;padding:30px}
+}
+@media (max-width:767px){
+	.met-news-bar{margin-left:0;margin-top:0;padding:20px 15px}
+}
+.met-news-bar ul.column{padding:0;list-style:none}
+.met-news-bar ul.column li{margin-bottom:10px}
+.met-news-bar ul.column li a{font-size:16px;color:#2a333c}
+.met-news-bar ul.column li a.active,
+.met-news-bar ul.column li a:hover{color:#61361d}
+.met-news-bar .recommend{margin:20px 0;padding:20px 0;border-bottom:1px solid #f0f2f5}
+.met-news-bar .recommend h3{font-size:18px;font-weight:300;margin:0}
+.met-news-bar .recommend .list-group{margin-top:10px;margin-bottom:0}
+.met-news-bar .recommend .list-group a{color:#2a333c;font-size:15px}
+.met-news-bar .recommend .list-group a:hover{color:#61361d}
