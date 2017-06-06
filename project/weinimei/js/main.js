@@ -37,5 +37,16 @@ var wow = new WOW(
 );
 wow.init();
 
+//产品列表
+window.onload= function() {
+    var elem = document.querySelector('#met-grid');
+    var msnry = new Masonry( elem, {
+      // options
+      itemSelector: '.masonry-item',
+      columnWidth: 20
+    });
+}
+
+
 
 })

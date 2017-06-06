@@ -5,6 +5,8 @@ body {
     color: #333;
     font: 14px/1.6 'Microsoft YaHei', Tahoma, Verdana, 'Simsun';
 }
+a{ color: #555; }
+a,a:hover{text-decoration: none;}
 ul{margin: 0; padding: 0; list-style: none;}
 .swiper-pagination-bullet-active {
     opacity: 1;
