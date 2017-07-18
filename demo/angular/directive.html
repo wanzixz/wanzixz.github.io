@@ -13,7 +13,7 @@
         <div ng-bind="name"></div>
         <hello></hello>
         <input type="text" ng-model="name">
-        <directititle color-attr='{{color}}'></directititle>
+        <directititle color-attr='{{color}}' name-Attr='{{model.name}}'></directititle>
     </div>
     
 </body>
@@ -29,16 +29,25 @@
         return {
             restrict: 'EAC',
             replace:true,
-            scope: {color:'=color'},
+            //scope: {color:'=color'},
+            colorAttr :'=',
+            namedAttr:'=',
             template: function(tElement,tAttrs){
                 var _html = '';
-                _html += '<div style="background-color:{{color}}">儿子:{{name}} <input ng-model="name"></div>';
+                _html += '<div style="background-color:{{color}}">儿子:{{name2}} <input ng-model="name"></div>';
                 return _html;
+            },
+            link:function (scope, elem, attr) {
+                console.log(attr.nameAttr);
+                scope.name = scope.name2 = 'dd1'
             }
 
         }
     });
     app.controller('testCtrl', function($scope){
+        $scope.model ={
+            name:'ddd'
+        }
         $scope.name = 'hellow world';
         $scope.color = 'red';
     });

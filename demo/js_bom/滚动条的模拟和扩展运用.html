@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<style>
+		#div1{ width: 30px; height: 500px; background: black; position: absolute; left: 10px; top: 10px; }
+		#div2{ width: 30px; height: 30px; background: red; position: absolute;left: 0; top: 0; }
+		#div3{ width: 500px; height: 500px; background: green; margin-left: 50px; margin-top: 10px; position: relative;}
+		#div4{ width: 500px; height: auto;  position: absolute;}
+	</style>
+	<script>
+		
+		window.onload = function(){
+			var oDiv1 = document.getElementById('div1');
+			var oDiv2 = document.getElementById('div2');
+			var oDiv3 = document.getElementById('div3');
+			var oDiv4 = document.getElementById('div4');
+			oDiv2.onmousedown = function(ev){
+				var ev = ev || event;
+				var disY = ev.clientY - this.offsetTop;
+				iMaxTop = oDiv1.offsetHeight - oDiv2.offsetHeight;
+				document.onmousemove = function(ev){
+					var ev  = ev || evnet;
+					var T = ev.clientY - disY;
+					if(T<0){
+						T = 0;
+					}else if( T> iMaxTop){
+						T = iMaxTop;
+					}
+					oDiv2.style.top = T +'px';
+
+					var oscale = T/iMaxTop;
+					oDiv4.style.top = (oDiv3.clientHeight - oDiv4.offsetHeight) * oscale + 'px';
+
+				}
+				document.onmouseup = function(ev){
+					document.onmousemove = document.onmouseup = null;
+
+				}
+
+			}
+		}
+	</script>
+</head>
+<body>
+<div id="div1">
+	<div id="div2"></div>
+</div>
+<div id="div3">
+	<div id="div4">
+		那最终交付时间还得看客户的这个红包权限开通情况，
+我们按原计划，先保证系统的所有功能不出问题，线上环境测试的时候可以拿一个测试的微信账号进行测试，确保整个流程是OK的那最终交付时间还得看客户的这个红包权限开通情况，
+我们按原计划，先保证系统的所有功能不出问题，线上环境测试的时候可以拿一个测试的微信账号进行测试，确保整个流程是OK的那最终交付时间还得看客户的这个红包权限开通情况，
+我们按原计划，先保证系统的所有功能不出问题，线上环境测试的时候可以拿一个测试的微信账号进行测试，确保整个流程是OK的那最终交付时间还得看客户的这个红包权限开通情况，
+我们按原计划，先保证系统的所有功能不出问题，线上环境测试的时候可以拿一个测试的微信账号进行测试，确保整个流程是OK的那最终交付时间还得看客户的这个红包权限开通情况，
+我们按原计划，先保证系统的所有功能不出问题，线上环境测试的时候可以拿一个测试的微信账号进行测试，确保整个流程是OK的那最终交付时间还得看客户的这个红包权限开通情况，
+我们按原计划，先保证系统的所有功能不出问题，线上环境测试的时候可以拿一个测试的微信账号进行测试，确保整个流程是OK的那最终交付时间还得看客户的这个红包权限开通情况，
+我们按原计划，先保证系统的所有功能不出问题，线上环境测试的时候可以拿一个测试的微信账号进行测试，确保整个流程是OK的那最终交付时间还得看客户的这个红包权限开通情况，
+我们按原计划，先保证系统的所有功能不出问题，线上环境测试的时候可以拿一个测试的微信账号进行测试，确保整个流程是OK的那最终交付时间还得看客户的这个红包权限开通情况，
+我们按原计划，先保证系统的所有功能不出问题，线上环境测试的时候可以拿一个测试的微信账号进行测试，确保整个流程是OK的那最终交付时间还得看客户的这个红包权限开通情况，
+我们按原计划，先保证系统的所有功能不出问题，线上环境测试的时候可以拿一个测试的微信账号进行测试，确保整个流程是OK的那最终交付时间还得看客户的这个红包权限开通情况，
+我们按原计划，先保证系统的所有功能不出问题，线上环境测试的时候可以拿一个测试的微信账号进行测试，确保整个流程是OK的那最终交付时间还得看客户的这个红包权限开通情况，
+我们按原计划，先保证系统的所有功能不出问题，线上环境测试的时候可以拿一个测试的微信账号进行测试，确保整个流程是OK的那最终交付时间还得看客户的这个红包权限开通情况，
+我们按原计划，先保证系统的所有功能不出问题，线上环境测试的时候可以拿一个测试的微信账号进行测试，确保整个流程是OK的那最终交付时间还得看客户的这个红包权限开通情况，
+我们按原计划，先保证系统的所有功能不出问题，线上环境测试的时候可以拿一个测试的微信账号进行测试，确保整个流程是OK的那最终交付时间还得看客户的这个红包权限开通情况，
+我们按原计划，先保证系统的所有功能不出问题，线上环境测试的时候可以拿一个测试的微信账号进行测试，确保整个流程是OK的那最终交付时间还得看客户的这个红包权限开通情况，
+我们按原计划，先保证系统的所有功能不出问题，线上环境测试的时候可以拿一个测试的微信账号进行测试，确保整个流程是OK的那最终交付时间还得看客户的这个红包权限开通情况，
+我们按原计划，先保证系统的所有功能不出问题，线上环境测试的时候可以拿一个测试的微信账号进行测试，确保整个流程是OK的那最终交付时间还得看客户的这个红包权限开通情况，
+我们按原计划，先保证系统的所有功能不出问题，线上环境测试的时候可以拿一个测试的微信账号进行测试，确保整个流程是OK的
+	</div>
+</div>
+	
+</body>
+</html>
