@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>百度</title>
+<style>
+	#q{ width: 300px; height: 30px; padding:5px; border: 1px solid #f90; font-size: 16px; }
+	#ul1{ border: 1px solid #f90; width: 310px; margin: 0; padding: 0;  display: none;}
+	#ul1 li a{ display: block; line-height: 30px; padding:5px; text-decoration: none; color: #000;}
+	#ul1 li a:hover{ background: #f90; color: #fff }
+</style>
+<script>
+function miaov(data){
+	console.log(data);
+	var oUl = document.getElementById('ul1');
+	var html = '';
+	if(data.s.length){
+		for(var i = 0 ; i<data.s.length; i++){
+			html +='<li><a href="https://www.baidu.com/s?wd='+data.s[i]+'" target="_blank" >'+data.s[i] +'</a></li>'
+		}
+		oUl.style.display = 'block';
+	}else{
+		oUl.style.display = 'none';
+	}
+	oUl.innerHTML = html;
+}
+
+window.onload = function(){
+	var oQ = document.getElementById('q');
+
+	var oUl = document.getElementById('ul1');
+
+	oQ.onkeyup = function(){
+		if(this.value != ''){
+			var oScript = document.createElement('script');
+			oScript.src = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd='+ oQ.value+'&cb=miaov';
+			document.body.appendChild(oScript);
+		}else{
+			oUl.style.display = 'none';
+		};
+		
+	}
+
+}	
+
+</script>
+
+</head>
+<body>
+	<input type="text" id="q">
+	<ul id="ul1"></ul>
+	
+</body>
+</html>
