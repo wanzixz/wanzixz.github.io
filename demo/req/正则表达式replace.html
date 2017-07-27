@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<script>
+	window.onload = function(){
+		var txt1 = document.getElementById('txt1');
+		var txt2 = document.getElementById('txt2');
+		var obtn = document.getElementById('btn1');
+		obtn.onclick = function(){
+			var str = txt1.value;
+			var re = /模板|代码|基础的/g;
+			//txt2.value = str.replace(re,'*');
+			txt2.value = str.replace(re,function(str){
+				var result = '';
+				for(var i = 0; i<str.length; i++){
+					result +='*';
+				}
+
+				return result;
+			});
+		}
+	}
+
+</script>
+<body>
+
+<textarea name="" id="txt1" cols="30" rows="10">
+	模板源代码里面除了大家熟知的HTML、CSS、JS之外还会有PHP嵌入代码、变量、数组、标签函数，你需要先了解这些代码的含义，会涉及到基础的PHP知识，本章就针对模板专有语法进行说明。
+</textarea>
+	<div><input type="button" id="btn1" value="替换"></div>
+<textarea name="" id="txt2" cols="30" rows="10"></textarea>
+</body>
+</html>
