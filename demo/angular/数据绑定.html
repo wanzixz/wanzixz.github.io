@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="webapp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>angular的Service模式学习</title>
+    <script src="js/angular.min.js"></script>
+</head>
+
+<body>
+    <div ng-controller="testCtrl" id="wrap" class="wrap">
+        <div ng-bind="name"></div>
+        <hello ng-bind="clock.now"></hello>
+        
+    </div>
+    
+</body>
+<script>
+    var app = angular.module('webapp', []);
+
+    app.controller('testCtrl', function($scope,$timeout){
+        $scope.clock = {
+          now: new Date()
+        }
+        var updateClock = function(){
+          $scope.clock.now = new Date();
+        };
+        setInterval(function(){
+          $scope.$apply(updateClock);
+        },1000)
+        updateClock();
+    });
+</script>
+
+</html>
