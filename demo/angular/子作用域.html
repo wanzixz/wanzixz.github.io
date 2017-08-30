@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="webapp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>子作用域</title>
+    <script src="js/angular.min.js"></script>
+</head>
+
+<body>
+    <div ng-controller="test" id="wrap" class="wrap">
+        <div ng-bind="someBareValue"></div>
+        <button ng-click="someAction()">communicate to child</button>
+        <div ng-controller="test2">
+          {{ someBareValue }}
+          <button ng-click="childAction()">communicate to parent</button>
+
+        </div>
+        
+        
+    </div>
+
+</body>
+<script>
+    var app = angular.module('webapp', []);
+ 
+    app.controller('test', function($scope) {
+        $scope.someBareValue = 'hello computer';
+        $scope.someAction = function(){
+          $scope.someBareValue = 'hello huma, form parent';
+        }
+    });
+    app.controller('test2',test2)
+
+    function test2($scope){
+      $scope.childAction = function(){
+        $scope.someBareValue = 'hello human, form child';
+      }
+    }
+    test2.$inject = ['$scope'];
+
+</script>
+
+</html>

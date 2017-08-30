@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    embed {
+      background: black;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <input type="text" id="videoUrl" value="https://v.qq.com/x/cover/cdd94z3tt6aqnvh/x0543nfx0th.html">
+    <input type="button" id="btn" value="确定">
+  </div>
+  <div id="container">
+    <div id="mod1"></div>
+  </div>
+
+  <!-- <embed id="video" src="" allowfullscreen="false" quality="high" width="480" height="400" align="middle" allowscriptaccess="always"
+    palette="red|black" type="application/x-shockwave-flash"> -->
+
+  <script src="https://ossweb-img.qq.com/images/js/zepto/zepto.min.js"></script>
+  <!-- <script src="https://imgcache.gtimg.cn/tencentvideo_v1/tvp/js/tvp.player_v2_zepto.js"></script> -->
+    <script src="https://imgcache.qq.com/tencentvideo_v1/tvp/js/tvp.player_v2_zepto.js"></script>
+  <script>
+    window.onload = function () {
+      var oInput = document.getElementById('videoUrl');
+      var ovideo = document.getElementById('video');
+      var videoId = '';
+
+      function getVId(url) {
+        var video_pc_Tx = '//v.qq.com';
+        var video_m_Tx = '//m.qq.com';
+        var v_url = oInput.value;
+        var v_url_id = '';
+        if (v_url.indexOf(video_pc_Tx) != -1) {
+          //截取Pc端视频ID
+          var Pc_Tx_Id_w = v_url.substr(0, v_url.lastIndexOf('.'));
+          v_url_id = Pc_Tx_Id_w.substr(Pc_Tx_Id_w.lastIndexOf('/') + 1, Pc_Tx_Id_w.length);
+        }
+        return v_url_id;
+      }
+
+
+
+      btn.onclick = function (ev) {
+        videoId = getVId(oInput.value);
+        if (videoId != '') {
+          video(videoId)
+          //ovideo.src = 'https://imgcache.qq.com/tencentvideo_v1/playerv3/TPout.swf?vid=' + videoId + '&auto=0'
+        }
+
+      }
+
+
+      function video(vid) {
+        var video = new tvp.VideoInfo();
+        video.setVid(vid);
+        player = new tvp.Player();
+        player.create({
+            width: "480",
+            height: "400",
+            video: video,
+            modId: "mod1",
+            isHtml5ShowLoadingAdOnStart:false,
+            isHtml5ShowLoadingAdOnChange:false,
+            liveFlashWatermark:true,
+            isHtml5UseAirPlay: true,
+            isHtml5UseFakeFullScreen: true,
+            vodFlashSkin: "http://imgcache.qq.com/minivideo_v1/vd/res/skins/TencentPlayerMiniSkin.swf",
+            autoplay: true//true为自动播放、false为不自动播放
+        });
+
+      }
+    }
+  </script>
+</body>
+
+</html>

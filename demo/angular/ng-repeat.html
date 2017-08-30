@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="webapp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>子作用域</title>
+    <script src="js/angular.min.js"></script>
+    <style>
+      .odd{
+        color:red;
+      }
+      .even{
+        color:blue;
+      }
+    </style>
+</head>
+
+<body >
+    <div ng-controller="test">
+      <ul>
+        <li ng-repeat="person in people" ng-class="{even:!$even,odd:!$odd}">
+          {{person.name}} lives in {{person.city}}
+        </li>
+      </ul>
+    </div>
+
+</body>
+<script>
+     var app = angular.module('webapp', []);
+ 
+    app.controller('test', test)
+
+    function test($scope) { //父集作用域
+        $scope.people = [
+          { name:'ari',city:'san francisco'},
+          {name:'erik',city:'seattle'}
+        ]
+    }
+    test.$inject = ['$scope']
+
+
+</script>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="webapp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>子作用域</title>
+    <script src="js/angular.min.js"></script>
+</head>
+
+<body>
+    <div ng-controller="test" id="wrap" class="wrap">
+        <div >
+          <p ng-bind-template="{{greeting}}{{app}}"></p>
+        </div>
+        <input type="text" ng-model="name" ng-change="change()">
+        <div ng-bind="name"></div>
+    </div>
+
+</body>
+<script>
+    var app = angular.module('webapp', []);
+ 
+    app.controller('test', test)
+
+    function test($scope) { //父集作用域
+       $scope.greeting = 'helloworld1';
+       $scope.app = 'webapp';
+       $scope.change = function(){
+        $scope.name = $scope.name + $scope.app
+       }
+    }
+    test.$inject = ['$scope']
+
+  
+
+</script>
+
+</html>

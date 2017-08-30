@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="webapp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>子作用域</title>
+    <script src="js/angular.min.js"></script>
+</head>
+
+<body>
+    <div ng-controller="test" id="wrap" class="wrap">
+        <form name="myform"  novalidate>
+          <div ng-form="mytest">
+            <input type="text" name="texts" ng-model="textd" required="required" ng-pattern="/^[a-zA-Z]$/">
+            <div ng-show="mytest.texts.$invalid">
+                <div ng-show="mytest.texts.$error.required">不能为空</div>
+            </div>
+            <div ng-show="mytest.texts.$dirty && mytest.texts.$invalid">
+                <div ng-show="mytest.texts.$error.pattern">请输入a-z的小写字母</div>
+            </div>
+          </div>
+          
+          <input type="submit" value="提交" ng-click="save()" ng-disabled="myform.$invalid">
+        </form>
+        
+        
+    </div>
+
+</body>
+<script>
+    var app = angular.module('webapp', []);
+ 
+    app.controller('test', test)
+
+
+    function test($scope) { //父集作用域
+       $scope.save = function(){
+        alert($scope.textd)
+       }
+    }
+    test.$inject = ['$scope']
+
+
+</script>
+
+</html>

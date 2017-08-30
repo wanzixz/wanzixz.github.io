@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="webapp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>子作用域</title>
+    <script src="js/angular.min.js"></script>
+</head>
+
+<body >
+    <div ng-include="'/mytemplate.html'" ></div>
+
+</body>
+<script>
+     var app = angular.module('webapp', []);
+ 
+    app.controller('test', test)
+
+    function test($scope) { //父集作用域
+        $scope.someModel = {
+          someValue:'hello computer'
+        }
+        $scope.someAction = function(){
+          $scope.someModel.someValue = 'hello human, form parent';
+        }
+    }
+    test.$inject = ['$scope']
+
+
+</script>
+
+</html>

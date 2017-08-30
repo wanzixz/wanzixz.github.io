@@ -11,6 +11,7 @@
 <body>
     <div ng-controller="test" id="wrap" class="wrap">
         <div ng-bind="name"></div>
+        <div ng-bind="names"></div>
     </div>
     <div ng-controller="ok">
         <div ng-bind="name"></div>
@@ -20,7 +21,10 @@
 <script>
     var app = angular.module('webapp', []);
     //Factory模式通过注册.factory('my注册名',方法())
-    app.factory('mytest', function() {
+    app.factory('mytest', mytest)
+       .factory('test',test);
+
+    function mytest() {
         var obj = {};
         obj.exec = function() {
             console.log(arguments);
@@ -31,12 +35,23 @@
             return arr;
         }
         return obj;
-    });
+    }
+    function test(){
+        var obj = {};
+        obj.m = function(){
+            var arr = [];
+            for(var i=0;i<arguments.length; i++){
+                arr.push(arguments[i]);
+            }
+            return arr;
+        };
+        return obj;
+    }
 
 
-
-    app.controller('test', function($scope, mytest) {
+    app.controller('test', function($scope, mytest, test) {
         $scope.name = mytest.exec('张三的歌', '李四的舞', '老王贼六');
+        $scope.names = test.m('1');
     });
     app.controller('ok', function($scope, mytest) {
         $scope.name = mytest.exec('oktest')
