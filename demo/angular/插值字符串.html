@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="webapp">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>子作用域</title>
+  <script src="js/angular.min.js"></script>
+</head>
+
+<body>
+  <div ng-controller="test" id="wrap" class="wrap">
+    <input type="email" ng-model="to" placeholder="Recipient">
+    <textarea name="" ng-model="emailBody" id="" cols="30" rows="10"></textarea>
+    <pre><%previewText%></pre>
+  </div>
+
+</body>
+<script>
+  var app = angular.module('webapp', []);
+  app.controller('test', test)
+  app.config(['$interpolateProvider', function ($interpolateProvider) {
+      $interpolateProvider.startSymbol('<%');
+      $interpolateProvider.endSymbol('%>');
+    }])
+    .factory('EmailParser', ['$interpolate', function ($interpolate) {
+      // 处理解析的服务
+      return {
+        parse: function (text, context) {
+          var template = $interpolate(text);
+          return template(context);
+        }
+      };
+    }]);
+
+  function test($scope, $interpolate, EmailParser) {
+    // 设置监听
+    $scope.$watch('emailBody', function (body) {
+      if (body) {
+        $scope.previewText = EmailParser.parse(body, {
+          to: $scope.to
+        });
+      }
+
+    })
+
+  }
+  test.$inject = ['$scope', '$interpolate', 'EmailParser']
+</script>
+
+</html>

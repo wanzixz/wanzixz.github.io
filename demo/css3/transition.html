@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+
+		body {
+			height: 11000px;
+		}
+
+		.nav_box { width: 100%; height: 44px; position: relative; top: 50px; border:1px solid red}
+		nav { position: absolute;top: -50px; z-index: 100; width: 100%; height: 44px; line-height: 44px; background-color: #f7f7f7;transition: top 1s ease-out;-webkit-transition: top 1s ease-out;}
+		nav.show { position: fixed; top: 0;transition: top 1s ease-out;-webkit-transition: top 1s ease-out;}
+		nav div.find_nav_list { width: 1200px; margin: 0 auto;}
+		nav ul { width: 100%;}
+		nav ul li { display: inline-block; margin-left: 140px;}
+		nav ul li a { font-size: 16px; color: #707070;}
+		nav ul li.active a { color: #be9e79;}
+		/* .box:hover .div{ -webkit-transform: translateZ(180px); } */
+	</style>
+	<script>
+		window.onload = function () {
+			var oBox = document.getElementById('box');
+			var oDiv = document.getElementById('div');
+			/* oBox.onmouseover = function () {
+				oDiv.setAttribute('class', 'div show');
+			}
+			oBox.onmouseleave = function () {
+				oDiv.setAttribute('class', 'div');
+			} */
+			document.onscroll = function () {
+				var top,left;
+				if (document.body && document.body.scrollTop) {
+					top = document.body.scrollTop;
+				}
+				console.log(top);
+				if (top >= 60) {
+					oDiv.setAttribute('class', 'div show');
+				} else {
+					oDiv.setAttribute('class', 'div');
+				} 
+			}
+		}
+	</script>
+</head>
+
+<body>
+
+	<div id="box" class="nav_box">
+		<nav id="div">
+			<div class="find_nav_list" id="nav">
+				<ul>
+					<li class="mynav_nav_cur active">
+						<a class="com_a" href="index.html#header">首页</a>
+					</li>
+					<li>
+						<a class="com_a" href="product.html">舌尖美食</a>
+					</li>
+					<li>
+						<a class="com_a" href="index.html#culture">品牌文化</a>
+					</li>
+					<li>
+						<a class="com_a" href="service.html">招商加盟</a>
+					</li>
+					<li>
+						<a class="com_a" href="index.html#contact">联系我们</a>
+					</li>
+					<li class="sideline">
+
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+
+
+</body>
+
+</html>

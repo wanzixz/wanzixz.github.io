@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="webapp">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>过滤器</title>
+  <script src="js/angular.min.js"></script>
+</head>
+
+<body>
+  <div ng-controller="test" id="wrap" class="wrap">
+
+    <div>{{ name | rmb }} </div>
+  </div>
+
+</body>
+<script>
+  var app = angular.module('webapp', []);
+  app.controller('test', test)
+    .filter('capitalize',capitalize)
+    .filter('rmb',rmb)
+    function capitalize(){
+      return function(input){
+        if(input){
+          return input[0].toUpperCase() + input.slice(1);
+        }
+      };
+    }
+
+    function rmb(){
+      return function(str){
+        if(str){
+          return '￥'+ str;
+        }
+      }
+    }
+    
+
+  function test($scope, $filter) {
+    $scope.name = '123456';
+
+    flter = $filter('limitTo');
+    var val = flter($scope.name,'2');
+    alert(val);
+
+  }
+  test.$inject = ['$scope', '$filter']
+</script>
+
+</html>

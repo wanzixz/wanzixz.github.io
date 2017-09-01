@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="webapp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>angular的Service模式学习</title>
+    <script src="js/angular.min.js"></script>
+    <style>
+        input.ng-invalid {
+            border: 1px solid red;
+        }
+
+        input.ng-valid {
+            border: 1px solid green;
+        }
+    </style>
+</head>
+
+<body>
+    <div ng-controller="testCtrl" id="wrap" class="wrap">
+
+        <form name="signup_form" novalidate ng-submit="signupForm()">
+            <fieldset>
+                <legend>Signup</legend>
+                <input  ng-class="{error: signup_form.name.$dirty && signup_form.name.$invalid}"  type="text" placeholder="name" name="name" ng-model="signup.name" ng-minlength="3" ng-maxlength="20" required ng-focus>
+                <div class="error" 
+                ng-show="signup_form.name.$dirty && signup_form.name.$invalid && !signup_form.name.$focused"> ddd</div>
+
+
+                <button type="submit" class="button radius">Submit</button>
+            </fieldset>
+        </form>
+    </div>
+</body>
+<script>
+    var app = angular.module('webapp', []);
+    app.directive('ngFocus',[function(){
+        var FOCUS_CLASS = 'ng-focused';
+        return {
+            restrict:'A',
+            require:'ngModel',
+            link:function(scope,element,attrs,ctrl){
+                ctrl.$focused = false;
+                element.bind('focus',function(evt){
+                    element.addClass(FOCUS_CLASS);
+                    scope.$apply(function(){
+                        ctrl.$focused = true;
+                    })
+                }).bind('blur',function(){
+                    element.removeClass(FOCUS_CLASS);
+                    scope.$apply(function(){
+                        ctrl.$focused = false;
+                    })
+                })
+            }
+        }
+    }])
+
+    app.controller('testCtrl', function ($scope) {
+        
+
+    });
+</script>
+
+</html>
