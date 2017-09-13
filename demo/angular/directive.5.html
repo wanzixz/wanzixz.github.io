@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="webapp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>angular的Service模式学习</title>
+    <script src="js/angular.min.js"></script>
+</head>
+
+<body>
+    <div ng-controller="testCtrl" id="wrap" class="wrap">
+        <input type="text" ng-model="someProperty" placeholder="typetoEnable">
+        <button type="submit" ng-model="button" ng-disabled="!someProperty">Abutton</button>
+        <textarea ng-disabled="isDisabled">Wait5seconds</textarea> 
+        <hr>
+        <!-- /////////////////////////// -->
+        Type here to make sibling readonly:
+        <input type="text" ng-model="someProperty"><br/>
+        <input type="text" ng-readonly="someProperty" value="{{someProperty}}">
+
+
+        <hr>
+<!-- /////////////////////////// -->
+        <label>someProperty = {{someProperty}}</label> 
+        <input type="checkbox" 
+         ng-checked="somePropertys" 
+         ng-init="somePropertys = true" 
+         ng-model="somePropertys"> 
+    </div>
+    
+</body>
+<script>
+    var app = angular.module('webapp', []);
+   app.run(function($rootScope,$timeout){
+        $rootScope.isDisabled = true;
+        $timeout(function(){
+            $rootScope.isDisabled = false;
+        },5000)
+   })
+    
+    app.controller('testCtrl', function($scope){
+        
+    });
+</script>
+
+</html>

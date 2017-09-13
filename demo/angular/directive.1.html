@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="webapp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>angular的Service模式学习</title>
+    <script src="js/angular.min.js"></script>
+</head>
+
+<body>
+    <div ng-controller="testCtrl" id="wrap" class="wrap">
+        <my-directive></my-directive>
+    </div>
+    
+</body>
+<script>
+    var app = angular.module('webapp', []);
+    app.directive('myDirective', function() {
+        return {
+            restrict: 'EA',
+            replace:true,
+            template: '<a href="http://www.baidu.com">百度</a>'
+        }
+    });
+    
+    app.controller('testCtrl', function($scope){
+        
+    });
+</script>
+
+</html>

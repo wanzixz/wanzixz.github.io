@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="webapp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>angular的Service模式学习</title>
+    <script src="js/angular.min.js"></script>
+</head>
+
+<body>
+    <div ng-controller="testCtrl" id="wrap" class="wrap">
+        <label>Their URL field:</label> 
+        <input type="text" ng-model="theirUrl" />
+        <div my-directive 
+        some-attr="theirUrl" 
+        my-link-text="百度">
+       </div> 
+    </div>
+    
+</body>
+<script>
+    var app = angular.module('webapp', []);
+    app.directive('myDirective', function() {
+        return {
+            restrict: 'EA',
+            replace:true,
+            scope:{
+                myUrl:'=someAttr',  //绑定策略
+                myLinkText:'@' //绑定策略
+            },
+            template: '<div><label>My Url Field:</label><input type="text" ng-model="myUrl" /><a href="{{myUrl}}">' + 
+            '{{myLinkText}}</a></div>', 
+            controller: function($scope) { 
+            // 指令可以有它自己的控制器，在那种情况下，我们可以将
+            // $scope.someProperty设置成"someProperty with @ binding" 
+            } 
+
+
+        }
+    });
+    
+    app.controller('testCtrl', function($scope){
+        
+    });
+</script>
+
+</html>
