@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 二维码识别
+title: vue-cli工具搭建vue项目
 category: 技术
 tags: viewport
 keywords: viewport
