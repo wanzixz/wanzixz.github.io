@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="webapp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>angular的Service模式学习</title>
+    <script src="js/angular.min.js"></script>
+</head>
+
+<body>
+    <div ng-controller="testCtrl" id="wrap" class="wrap">
+        <div sidebox title="Links">
+            <ul>
+                <li>First link</li>
+                <li>Second link</li>
+            </ul>
+        </div>
+        <div sidebox title="TagCloud"> 
+            <div class="tagcloud"> 
+            <a href="">Graphics</a> 
+            <a href="">AngularJS</a> 
+            <a href="">D3</a> 
+            <a href="">Front-end</a> 
+            <a href="">Startup</a> 
+            </div> 
+        </div> 
+    </div>
+
+</body>
+<script>
+    var app = angular.module('webapp', []);
+    app.run(function ($rootScope, $timeout) {
+        $rootScope.isDisabled = true;
+        $timeout(function () {
+            $rootScope.isDisabled = false;
+        }, 5000)
+    })
+    app.directive('sidebox', function() { 
+        return { 
+        restrict: 'EA', 
+        scope: { 
+            title: '@' 
+        },
+        replace:true,
+        transclude: true, 
+        template: '<div class="sidebox">\
+            <div class="content">\
+                <h2 class="header">{{ title }}</h2>\
+                <span class="content" ng-transclude>\
+                </span>\
+            </div>\
+        </div>' 
+        }; 
+       }); 
+
+    app.controller('testCtrl', function ($scope) {
+
+    });
+</script>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>CORS Test</head>
+
+<body>
+    <div id="img_Div"></div>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+    <script type="text/javascript">
+        //XmlHttpRequest对象  
+        function createXmlHttpRequest() {
+            if (window.ActiveXObject) { //如果是IE浏览器  
+                return new ActiveXObject("Microsoft.XMLHTTP");
+            } else if (window.XMLHttpRequest) { //非IE浏览器  
+                return new XMLHttpRequest();
+            }
+        }
+
+        function createCORSRequest(method, url) {
+            var xhr = new XMLHttpRequest();
+            if ("withCredentials" in xhr) {
+                // 针对Chrome/Safari/Firefox.
+                xhr.open(method, url, true);
+            } else if (typeof XDomainRequest != "undefined") {
+                // 针对IE
+                xhr = new XDomainRequest();
+                xhr.open(method, url);
+            } else {
+                // 不支持CORS
+                xhr = null;
+            }
+            return xhr;
+        }
+
+        function getFile() {
+            /*    var xhr = createXmlHttpRequest();
+               xhr.open('GET', 'http://oss.youkouyang.com/1.jpg', true);
+               xhr.setRequestHeader('X-Custom-Header', 'value');
+               xhr.send(); */
+            $.ajax("http://oss.youkouyang.com/1.jpg", {
+                type: "GET",
+                xhrFields: {
+                    withCredentials: false
+                },
+                headers: {
+                    Accept: "application/json; charset=utf-8",
+                },
+                xhrHeaders:{
+
+                },
+                beforeSend: function(request) {
+                    console.log(request);
+                        request.setRequestHeader("X-Custom-Header", "Chenxizhang");
+                },
+                crossDomain: true,
+                success: function (data, status, xhr) {
+                    alert(111);
+                    console.log(111, data)
+                },
+                error: function () {
+                    alert('222')
+                }
+
+            });
+        }
+        getFile()
+    </script>
+    <div class="row">
+        <input type="button" onclick="getFile()" value="Get" />
+    </div>
+</body>
+
+</html>

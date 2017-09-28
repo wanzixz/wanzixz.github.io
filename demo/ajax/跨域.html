@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+</head>
+
+<body>
+
+  <input type="text" id="q">
+  <input type="button" id="btn" value="搜索">
+  <p id="msg"></p>
+  <hr>
+  <dl id="list">
+
+</body>
+<script>
+  window.onload = function () {
+    var oQ = document.getElementById('q');
+    var oBtn = document.getElementById('btn');
+    var oMsg = document.getElementById('msg');
+    var oList = document.getElementById('list');
+
+    var myUrl =
+      'http://wikidata.org/w/api.php?action=wbgetentities&sites=frwiki&titles=France&languages=zh-hans|zh-hant|fr&props=sitelinks|labels|aliases|descriptions&format=json';
+
+    oBtn.onclick = function () {
+      if (oQ.value != '') {
+        //var url = 'https://api.douban.com/v2/book/search?q=' + oQ.value + '&xd=json&callback=fn1'
+        getDate(myUrl);
+
+      }
+    }
+
+    function getDate(myurl) {
+      /* 
+      $.ajax() + jsonp:
+      
+      $.ajax({
+        dataType: "jsonp",
+        url:myUrl,
+        }).done(function ( data ) {
+        console.log(data);
+      }); 
+      
+      */
+
+      /*  
+     $.ajax()+json+&calback=?:
+
+     $.ajax({
+      dataType: "json",
+      url: myurl + '&callback=?',
+      }).done(function ( data ) {
+        console.log(data);
+    }); 
+    */
+
+      /* 
+      $.getJSON()+calback=?:
+
+      $.getJSON( myurl + '&callback=?', function(data) {
+        // do my stuff
+        console.log(data);
+      }); 
+      */
+
+      /*  $.getJSON( 'https://api.douban.com/v2/book/search?q=' + oQ.value + '&xd=json&callback=fn1', function(data) {
+         // do my stuff
+         console.log(data);
+       }); */
+      $.ajax({
+        url: "https://api.douban.com/v2/book/search",
+        dataType: 'jsonp',
+        data: {
+          q: oQ.value,
+          xd: 'json'
+        },
+        jsonp: 'callback',
+        success: function (data) {
+          var oMsg = document.getElementById('msg');
+          var oList = document.getElementById('list');
+          oMsg.innerHTML = '您搜索了' + data.total + '条';
+          var html = '';
+          for (var i = 0; i < data.books.length; i++) {
+            html += '<dt>' + data.books[i].title + '</dt><dd><img src="' + data.books[i].image + '" alt="' +
+              data.books[i].title + '"></dd>'
+          }
+          oList.innerHTML = html;
+        },
+        timeout: 3000
+      });
+    }
+
+    function getHello() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("post", "http://b.example.com/Test.ashx", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");　　　
+        // 声明请求源
+        xhr.setRequestHeader("Origin", "http://a.example.com");
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            var responseText = xhr.responseText;
+            console.info(responseText);
+          }
+        }
+        xhr.send();
+      }
+
+
+  }
+</script>
+
+</html>

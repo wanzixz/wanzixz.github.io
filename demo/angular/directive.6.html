@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="webapp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>angular的Service模式学习</title>
+    <script src="js/angular.min.js"></script>
+</head>
+
+<body>
+    <div ng-controller="testCtrl" id="wrap" class="wrap">
+        <div ng-init="myProperty='wow,thisiscool'">
+            Surrounding scope: {{ myProperty }}
+            <div my-inherit-scope-directive></div>
+            <div my-directive></div>
+        </div>
+    </div>
+
+</body>
+<script>
+    var app = angular.module('webapp', []);
+    app.run(function ($rootScope, $timeout) {
+            $rootScope.isDisabled = true;
+            $timeout(function () {
+                $rootScope.isDisabled = false;
+            }, 5000)
+        })
+        app.directive('myDirective', function () {
+            return {
+                restrict: 'A',
+                template: 'Inside myDirective, isolate scope: {{ myProperty }}',
+                scope: {}
+            };
+        })
+        app.directive('myInheritScopeDirective', function () {
+            return {
+                restrict: 'A',
+                template: 'Inside myDirective, isolate scope: {{ myProperty }}',
+                scope: true
+            };
+        });
+
+    app.controller('testCtrl', function ($scope) {
+        $scope.equation = {};
+        $scope.change = function () {
+            $scope.equation.output = parseInt($scope.equation.x) + 2;
+        }
+    });
+</script>
+
+</html>

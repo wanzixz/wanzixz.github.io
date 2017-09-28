@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="webapp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>angular的Service模式学习</title>
+    <script src="js/angular.min.js"></script>
+</head>
+
+<body>
+    <div ng-controller="testCtrl" id="wrap" class="wrap">
+       <div link >http://baidu.com</div>
+    </div>
+
+</body>
+<script>
+    var app = angular.module('webapp', []);
+    app.run(function ($rootScope, $timeout) {
+        $rootScope.isDisabled = true;
+        $timeout(function () {
+            $rootScope.isDisabled = false;
+        }, 5000)
+    })
+    app.directive('link', function () {
+        return {
+            restrict: 'EA',
+            transclude: true,
+            controller: function ($scope, $element, $transclude, $log) {
+                $transclude(function (clone) {
+                    var a = angular.element('<a>');
+                    a.attr('href', clone.text());
+                    a.text(clone.text());
+                    $log.info("Created new a tag in link directive");
+                    $element.append(a);
+                });
+            }
+        };
+    });
+
+    app.controller('testCtrl', function ($scope) {
+
+    });
+</script>
+
+</html>
