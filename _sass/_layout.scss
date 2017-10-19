@@ -215,10 +215,13 @@ box-sizing: border-box; }
     color: #666664;
     background-color:#fefef5 ;
 }
-.archive ul{
+.archive,.archive ul{
     margin:0;
     padding:0;
     list-style: none;
+}
+.archive legend{
+    margin-top:20px;
 }
 .main-footer {
     background: #202020;
