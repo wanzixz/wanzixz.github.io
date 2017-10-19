@@ -45,10 +45,10 @@ $(document).on({
 if(comment) comment()
 //comment
 function comment(){
-    if ( $('.ds-thread, .ds-recent-comments').length > 0 ) { 
-        if (typeof DUOSHUO !== 'undefined') DUOSHUO.EmbedThread('.ds-thread');
-        else $.getScript("//static.duoshuo.com/embed.js");
-  }
+    /* if ( $('.ds-thread, .ds-recent-comments').length > 0 ) { 
+    if (typeof DUOSHUO !== 'undefined') DUOSHUO.EmbedThread('.ds-thread');
+    else $.getScript("//static.duoshuo.com/embed.js");
+  } */
 }
 
 
