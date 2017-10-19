@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html ng-app="webapp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>服务</title>
+    <script src="js/angular.min.js"></script>
+</head>
+
+<body>
+    <div ng-controller="testCtrl" id="wrap" class="wrap">
+      <label for="username"> 
+        Type in a GitHub username 
+        </label> 
+        <input type="text" 
+        ng-model="username" 
+        placeholder="Enter a GitHub username" /> 
+        <ul> 
+        <li ng-repeat="event in events"> 
+        <!--
+        event.actor and event.repo are returned 
+        by the github API. To view the raw
+        API, uncomment the next line: 
+        --> 
+        <!-- {{ event | json }} --> 
+        {{ event.actor.login }} {{ event.repo.name }}
+        </li> 
+        </ul> 
+       
+    </div>
+
+</body>
+<script>
+    var app = angular.module('webapp', []);
+    app.factory('githubService',function($http){
+      var githubUrl = 'https://api.github.com';
+      var runUserRequest = function(username,path){
+        return $http({
+          method:'JSONP',
+          url:githubUrl + '/user/' + username + '/' + path + '?callback=JSON_CALLBACK'
+        });
+      }
+
+      return {
+        events: function(username){
+          return runUserRequest(username,'events');
+        },
+        setUsername: function(username) { 
+          githubUsername = username; 
+        } 
+      }
+
+    })
+ 
+
+    app.controller('testCtrl', function ($scope,githubService) {
+      //$scope.events = githubService.events('wanzixz');
+      
+      $scope.$watch('username',function(newUsrname){
+        githubService.events(newUsrname).success(function(data,status,headers){
+          $scope.events = data.data;
+          console.log($scope.events);
+        })
+      })
+      $scope.setUsername = githubService.setUsername; 
+      console.log($scope.setUsername)
+    });
+</script>
+
+</html>
