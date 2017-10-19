@@ -200,6 +200,7 @@ box-sizing: border-box; }
     font-size: 2.5em;
     line-height: 1em;
 }
+
 .post-content {
     font: 400 18px/1.62 "Arial", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", sans-serif;
     color: #444443;
@@ -214,7 +215,11 @@ box-sizing: border-box; }
     color: #666664;
     background-color:#fefef5 ;
 }
-
+.archive ul{
+    margin:0;
+    padding:0;
+    list-style: none;
+}
 .main-footer {
     background: #202020;
     padding: 35px 0 0;
