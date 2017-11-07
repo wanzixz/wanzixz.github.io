@@ -1,5 +1,6 @@
 _site
 .sass-cache
 .jekyll-metadata
+.idea
 /project/qqlive/video
 demo/webpack/webpack/webpack-demo/node_modules/

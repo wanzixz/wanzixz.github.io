@@ -16,6 +16,7 @@
         some-attr="theirUrl" 
         my-link-text="百度">
        </div> 
+       <button ng-click="dd()">点击</button>
     </div>
     
 </body>
@@ -31,9 +32,10 @@
             },
             template: '<div><label>My Url Field:</label><input type="text" ng-model="myUrl" /><a href="{{myUrl}}">' + 
             '{{myLinkText}}</a></div>', 
-            controller: function($scope) { 
+            link: function(scope) { 
             // 指令可以有它自己的控制器，在那种情况下，我们可以将
             // $scope.someProperty设置成"someProperty with @ binding" 
+                scope.myUrl = 11;
             } 
 
 
@@ -41,7 +43,12 @@
     });
     
     app.controller('testCtrl', function($scope){
-        
+        $scope.$watch($scope.theirUrl,function(newVal,oldVal){
+            console.log(newVal,oldVal)
+        })
+        $scope.dd = function(){
+            console.log($scope.theirUrl);
+        }
     });
 </script>
 
