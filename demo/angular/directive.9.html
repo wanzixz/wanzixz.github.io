@@ -1,103 +1,41 @@
 <!DOCTYPE html>
 <html ng-app="webapp">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>angular的Service模式学习</title>
     <style>
-    body{
-        background: #000;
-    }
-    .load-container {
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    width: 240px;
-    height: 240px;
-    float: left;
-    position: relative;
-    overflow: hidden;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-.loader {
-    -webkit-transform: translateZ(0);
-    -moz-transform: translateZ(0);
-    -ms-transform: translateZ(0);
-    -o-transform: translateZ(0);
-    transform: translateZ(0);
-}
-.load3 .loader {
-    font-size: 10px;
-    margin: 5em auto;
-    text-indent: -9999em;
-    width: 11em;
-    height: 11em;
-    border-radius: 50%;
-    background: #ffffff;
-    background: -moz-linear-gradient(top, #ffffff 10%, rgba(255, 255, 255, 0) 60%);
-    background: -webkit-linear-gradient(top, #ffffff 10%, rgba(255, 255, 255, 0) 60%); 
-    background: -o-linear-gradient(top, #ffffff 10%, rgba(255, 255, 255, 0) 60%);
-    background: -ms-linear-gradient(top, #ffffff 10%, rgba(255, 255, 255, 0) 60%);
-    background: linear-gradient(to bottom, #ffffff 10%, rgba(255, 255, 255, 0) 60%);
-    position: relative;
-    -webkit-animation: load3 1.4s infinite linear; 
-     animation: load3 1.4s infinite linear; 
-}
-.load3 .loader:before {
-    width: 50%;
-    height: 50%;
-    background: #fff;
-    border-radius: 100% 0 0 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    content: '';
-    -webkit-transform: rotate(100deg);
-    transform-origin: bottom right;
-}
-.load3 .loader:after {
-    background: #000;
-    width: 75%;
-    height: 75%;
-    border-radius: 50%;
-    content: '';
-    margin: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-  }
-  @-webkit-keyframes load3 {
-    0% {
-      -webkit-transform: rotate(0deg);
-      transform: rotate(0deg);
-    }
-    100% {
-      -webkit-transform: rotate(360deg);
-      transform: rotate(360deg);
-    }
-  }
-  @keyframes load3 {
-    0% {
-      -webkit-transform: rotate(0deg);
-      transform: rotate(0deg);
-    }
-    100% {
-      -webkit-transform: rotate(360deg);
-      transform: rotate(360deg);
-    }
-  }
+        #div1{ width:100px; height:100px; background:red; position:absolute;}
     </style>
+    <script src="js/angular.min.js"></script>
 </head>
 
 <body>
-    <div class="load-container load3">
-		<div class="loader">Loading...</div>
-	</div>
+<div ng-controller="testCtrl" id="wrap" class="wrap">
+    <div id="div1" my-drag></div>
+</div>
 
 </body>
 <script>
-    
+    var app = angular.module('webapp', []);
+
+    app.directive('myDrag', function () {
+        return {
+            restrict: 'A',
+            transclude: true,
+            controller:function($scope){
+                $scope.name = 'miaov';
+            },
+            link:function(scope,element,link){
+                console.log(scope.name);
+            }
+
+        };
+    });
+
+    app.controller('testCtrl', function ($scope) {
+
+    });
 </script>
 
 </html>

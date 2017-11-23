@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<script>
+  window.onload = function(){
+
+    var imgTag = document.getElementsByClassName('imgTag');
+    
+    for(var i=0;i<imgTag.length;i++){
+      var oImg = imgTag[i].getElementsByTagName('img')[0];
+      var imgTagW = imgTag[i].clientWidth;
+      var imgTagH = imgTag[i].clientHeight;
+
+      DrawImage(oImg,imgTagW,imgTagH);
+    }
+
+   //图片缩放居中核心功能
+  function DrawImage(ImgElm, width_s, height_s) {
+      var imgW = ImgElm.clientWidth;
+      var imgH = ImgElm.clientHeight;
+      if (ImgElm) {
+          if ((imgW / imgH) <= (width_s / height_s)) {
+            //console.log(ImgElm)
+              ImgElm.style.width = width_s + 'px';
+              var height =width_s/(imgW/ imgH) ;
+              
+              if(height>height_s){
+                ImgElm.style.height ='auto';
+                ImgElm.style.marginTop = -(height-height_s)/2 + "px";
+              }else{
+                ImgElm.style.height = height_s + 'px';
+              }
+              
+          } else {
+              ImgElm.style.height = height_s + 'px';
+              var width =  height_s*(imgW/imgH);
+              if(width>width_s){
+                ImgElm.style.width = 'auto';
+              }
+              ImgElm.style.marginLeft = -(width - width_s)/2 + "px";
+          }
+      }
+  }
+
+    
+
+
+
+
+  }
+</script>
+<body>
+
+  <div class="imgTag" style="width:227px; height:393px; border:1px solid #ccc; margin:50px; overflow:hidden;">
+    <img src="http://pmo1b7e20.pic30.websiteonline.cn/upload/5fo7.jpg" alt="">
+  </div>
+
+  <div class="imgTag" style="width:1079px; height:336px;border:1px solid #ccc; margin:50px; overflow:hidden;">
+      <img src="http://pmo1b7e20.pic30.websiteonline.cn/upload/4.jpg" alt="">
+  </div>
+  <div class="imgTag" style="width:200px; height:200px;border:1px solid #ccc; margin:50px; overflow:hidden;">
+    <img src="images/11.png" alt="">
+  </div>
+  
+</body>
+</html>
