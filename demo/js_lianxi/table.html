@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>html canvas 抽奖大转盘</title>
+    <style>
+        #canvas{
+            position: absolute;
+            z-index: -1;
+            transition: transform 4s ;
+            -webkit-transition: transform 4s ;
+            -moz-transition: transform 4s ;
+            -o-transition: transform 4s ;
+        }
+        #canvas1{
+            border: 3px solid red;
+            position: absolute;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+<style>
+ul#bcty365_nav{padding-left:50px; margin-bottom:10px; border-bottom:2px solid #ccc; overflow:hidden; _zoom:1;}
+ul#bcty365_nav li{float:left; display:inline; margin:10px;}
+ul#bcty365_nav li a{display:block;color:#000000; font-size:16px;}
+ul#bcty365_nav li a,#wimoban_p,#wimoban_p a{ font-family:"微软雅黑";}
+ul#bcty365_nav li a:hover,#wimoban_p a:hover{color:red;}
+</style>	
+
+	
+
+
+      <canvas id="canvas"></canvas>
+      <canvas id="canvas1"></canvas>
+    <script>
+       var  canvas=document.getElementById("canvas");
+       var  canvas1=document.getElementById("canvas1");
+       var  ctx=canvas.getContext("2d");
+       var  ctx1=canvas1.getContext("2d");
+       var  itext=["一等奖","二等奖","三等奖","四等奖","五等奖","谢谢参与"];
+       canvas.width=800;
+       canvas.height=600;
+       canvas1.width=800;
+       canvas1.height=600;
+       var w=canvas.width/2;
+       var h=canvas.height/2;
+       var startangle=0;
+       var endangle=0;
+       angel=Math.PI*2/itext.length;
+       console.log(angel);
+       speed=50;
+       degree=0;
+       price="";
+       mark=9;
+       var num,round;
+
+       var outcircle=function() {
+           ctx.lineWidth=300;
+           for (var i = 0; i < itext.length; i++) {
+               startangle = angel * i;
+               endangle = angel * (i + 1);
+               (i + 1) % 2 ? ctx.strokeStyle = "#333" : ctx.strokeStyle = "#ccc";
+               ctx.beginPath();
+               ctx.arc(w, h, 100, startangle, endangle);
+               ctx.stroke();
+               
+           }
+           canvas.style.transform="rotate(-60deg)";
+       };
+       var incircle=function(){
+           ctx.fillStyle="rgba(0,0,0,0.5)";
+           ctx.beginPath();
+           ctx.arc(w,h,80,0,2*Math.PI);
+           ctx.fill();
+       };
+       var text=function(){
+           ctx.font="30px bold Arial";
+           ctx.fillStyle="#f60";
+           ctx.textAlign="center";
+           ctx.textBaseline="middle";
+           ctx.translate(w,h);
+           ctx.rotate(angel/2);
+           ctx.rotate(-angel);
+           for(var i=0;i<itext.length;i++)
+           {
+               ctx.rotate(-angel);
+               ctx.fillText(itext[i],150,0);
+
+           }
+           ctx.translate(-w,-h);
+       };
+
+       var get_xy=function(ev){
+           var x,y;
+           if(ev.layerX||ev.layerY==0)
+           {
+               x=ev.layerX;
+               y=ev.layerY;
+           }
+           else if(ev.offsetX||ev.offsetY)
+           {
+               x=ev.offsetX;
+               y=ev.offsetY;
+           }
+           return {x:x,y:y}
+       };
+       i=0;
+               canvas1.onclick = function (e) {
+                       p = get_xy(e);
+                   if(i==0) {
+                       if (p && ctx1.isPointInPath(p.x, p.y)) {
+                           i++;
+                           spin();
+                           setTimeout("i=0,alert(price)",4000);
+
+                       }
+                   }
+
+           };
+       var btn=function(){
+           ctx1.font="20px Arial";
+           ctx1.fillStyle="red";
+           ctx1.textAlign="center";
+           ctx1.textBaseline="middle";
+           ctx1.beginPath();
+           ctx1.arc(w,h,50,0,2*Math.PI);
+           ctx1.fill();
+           ctx1.fillStyle="#fff";
+           ctx1.fillText("开始抽奖",w,h);
+
+       };
+       var point=function(){
+           ctx1.fillStyle="#177889";
+           ctx1.beginPath();
+           ctx1.moveTo(w,h-120);
+           ctx1.lineTo(w-46,h-20);
+           ctx1.lineTo(w+46,h-20);
+           ctx1.fill();
+       };
+       j=0;
+       num1=-1;
+       range=0;
+        var spin=function() {
+            random();
+            if (j == 0) {
+                degree += Math.floor(360 * round) + (num - 1) * (360/itext.length);
+                j++;
+            }
+            else {
+                    degree += Math.floor(360 * round) + ((num - num1) * (360/itext.length));
+            }
+           num1 = num;
+
+            console.log(degree, round, num,range,mark);
+            if(num !=0)price=itext[num-1];
+            else {price=itext[itext.length - 1];}
+            if(num==0){
+                canvas.style.transform="rotate("+degree+"deg)";
+            }
+            if(num==1){
+                canvas.style.transform="rotate("+degree+"deg)";
+            }
+            if(num==2){
+                canvas.style.transform="rotate("+degree+"deg)";
+            }
+            if(num==3){
+                canvas.style.transform="rotate("+degree+"deg)";
+            }
+            if(num==4){
+                canvas.style.transform="rotate("+degree+"deg)";
+            }
+            if(num==5){
+                canvas.style.transform="rotate("+degree+"deg)";
+            }
+           /*  if(num==6){
+
+                canvas.style.transform="rotate("+degree+"deg)";
+            } */
+/*             if(num==7){
+                canvas.style.transform="rotate("+degree+"deg)";
+            } */
+
+        };
+        var random=function(){
+            mark=Math.floor(Math.random()*10);
+          if(mark>=4)
+             {
+                num = 0;
+            }
+            else if(mark>=1)
+          {
+              num=Math.floor(Math.random() * 4)+4;
+          }
+            else
+                  num=2;
+
+            round=Math.floor(Math.random()*2+4);
+            if(num1>num)
+            range=Math.floor(Math.random()*9+36);
+            else{
+                range=Math.floor(Math.random()*8+35);
+            }
+        };
+
+        window.onload= function () {
+            outcircle();
+            text();
+            incircle();
+            point();
+            btn();
+        }
+    </script>
+
+
+</body>
+</html>

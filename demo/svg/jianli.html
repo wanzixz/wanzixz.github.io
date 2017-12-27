@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div style="width:500px; height:200px; margin:0 auto; border:1px solid red; border-radius:100%;">
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%">
+      <!-- <polygon points="200,10 0,100 400,100 600,133" style="fill:red;stroke:darkblue;"></polygon> -->
+
+      <!--  <polygon points="100,0 40,180 195,70 4,70 160,180" style="fill:red;stroke:darkblue; fill-rule:evenodd;"></polygon> -->
+      <defs>
+        <path id="path1" d="M75,20 a1,1 0 0,0 100,0" />
+      </defs>
+      <text x="10" y="100" style="fill:red;">
+        <textPath xlink:href="#path1">I love SVG I love SVG</textPath>
+      </text>
+
+      <path d="M10 30 C200 0" stroke="red"></path>
+
+    </svg>
+  </div>
+</body>
+
+</html>

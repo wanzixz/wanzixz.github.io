@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #div1,#div2{ width:400px; height:200px; padding:20px 0; position: relative; border: 5px solid #ccc; border-radius: 5px; margin: 10px 0;}
+    #btn1,#btn2{ position: relative; width:50px; height: 25px; background: #000; color: #fff; display: inline-block; text-align: center;}
+    #cont{ width: 390px; height: 200px; border: 0; position: absolute; top: 20px; left: 20px;}
+    #btn1{ left: 100px;}
+    #btn2{ left:200px;}
+    span{ position: absolute; transition:all 2s;}
+  </style>
+</head>
+
+<body>
+  <div id="div1"></div>
+  <div id="btn1">↓</div>
+  <div id="btn2">↑</div>
+  <div id="div2"></div>
+  <div id="cont"></div>
+
+</body>
+<script>
+  var str ='深圳，简称“深”，别称鹏城，中国四大一线城市之一，广东省省辖市、计划单列市、副省级市、国家区域中心城市、超大城市。地处广东南部，珠江三角洲东岸，与香港一水之隔，东临大亚湾和大鹏湾，西濒珠江口和伶仃洋，南隔深圳河与香港相连，北部与东莞、惠州接壤。';
+  var cont = document.getElementById('cont');
+  var btn1 = document.getElementById('btn1');
+  var btn2 = document.getElementById('btn2');
+  var spans = cont.getElementsByTagName('span');
+  var timer = null,
+      isUp = true,
+      num = 0;
+
+  var str1 = '';
+  for(var i = 0; i<str.length; i++){
+    str1 += '<span style="left:'+ i%24*16 +'px; top:'+ Math.floor(i/24)*30+'px">'+ str.charAt(i) +'</span>';
+  }
+
+  cont.innerHTML = str1;
+  btn1.onclick = function(){
+    if(isUp  && num ==0){
+      fn(298,'red')
+    }
+    
+  }
+  btn2.onclick = function(){
+    if(!isUp && num ==0 ){
+      fn(0,'')
+    }
+  }
+  function fn(n,color){
+    timer = setInterval(function(){
+      spans[num].style.top = Math.floor(num/24)*30+n + 'px';
+      spans[num].style.color = color;
+      num ++ ;
+      if(n>0){
+        isUp = false;
+      }else{
+        isUp = true;
+      }
+      if(num >spans.length -1 ){
+        clearInterval(timer)
+        num = 0;
+      }
+    },30)
+  }
+ 
+</script>
+
+</html>
