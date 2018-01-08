@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body{
+      margin:0;
+      background: #000;
+    }
+    img{
+      display: block;
+      width:100%;
+    }
+    @-webkit-keyframes snow{
+      0% {
+        background-position: 0 0, 0 0;
+        
+      }
+      100%{
+        background-position: 500px 1000px, 500px 500px;
+      }
+    }
+    @keyframes snow{
+      0% {
+        background-position: 0 0, 0 0;
+        
+      }
+      100%{
+        background-position: 500px 1000px, 500px 500px;
+      }
+    }
+    #snowMask{
+      position: fixed;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      background: url(http://2013.miaov.com/2013/img/snow1.png),url(http://2013.miaov.com/2013/img/snow2.png);
+      pointer-events: none;
+      -webkit-animation: snow 15s linear infinite;
+      animation: snow 15s linear infinite;
+    }
+    /* http://2013.miaov.com/2013/img/snow1.png
+    http://2013.miaov.com/2013/img/snow2.png */
+  </style>
+</head>
+<body>
+    <div id="snowMask"></div>
+</body>
+<script>
+  (function(){
+    var snowMask = document.getElementById('snowMask');
+    function isIE(){
+      if(!!window.ActiveXObject || "ActiveXObject" in window) 
+        return true 
+      else 
+        return false;
+    }
+    snowMask.style.display = (!isIE()) ? "block":"none";
+  })();
+</script>
+</html>
