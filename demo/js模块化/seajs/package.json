@@ -1,0 +1,10 @@
+{
+  "name": "grt",
+  "version": "1.0.0",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-cmd-transport": "~0.3.0",
+    "grunt-cmd-concat": "~0.2.7",
+    "grunt-contrib-uglify": "~3.3.0"
+  }
+}
