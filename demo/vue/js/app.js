@@ -1,11 +1,12 @@
 //存取localStorage中的数据
-var store = {
-    save(key, value) {
+ var store = {
+    save(key, value){
         localStorage.setItem(key, JSON.stringify(value));
     },
-    fetch(key) {
+    fetch(key){
         return JSON.parse(localStorage.getItem(key)) || [];
     }
+
 }
 
 /*var list = [
@@ -21,16 +22,16 @@ var store = {
 var list = store.fetch('miao-new-class');
 //过滤的时候有三种情况 all finished unfinished
 var filter = {
-    all: function(list) {
+    all: function (list) {
         return list
     },
-    finished: function(list) {
-        return list.filter(function(item) {
+    finished: function (list) {
+        return list.filter(function (item) {
             return item.isChecked;
         })
     },
-    unfinished: function(list) {
-        return list.filter(function(item) {
+    unfinished: function (list) {
+        return list.filter(function (item) {
             return !item.isChecked;
         })
     }
@@ -50,7 +51,7 @@ var vm = new Vue({
         	store.save('miao-new-class',this.list);
         }*/
         list: { //深度监控
-            handler: function() {
+            handler: function () {
                 store.save('miao-new-class', this.list);
             },
             deep: true
@@ -58,31 +59,43 @@ var vm = new Vue({
     },
     computed: {
         noChecked() {
-            return this.list.filter(function(item) {
-                return !item.isChecked
-            }).length
+            return this
+                .list
+                .filter(function (item) {
+                    return !item.isChecked
+                })
+                .length
         },
-        filteredList: function() {
+        filteredList: function () {
             //如果找到了过滤函数，就返回过滤后的数据，如果没有找到，就返回所有的数据
-            return filter[this.visibility](list) ? filter[this.visibility](list) : list;
+            return filter[this.visibility](list)
+                ? filter[this.visibility](list)
+                : list;
         },
-        selectItem:function(){
-        	return this.visibility ? this.visibility : 'all';
-        	//console.log(this.visibility);
+        selectItem: function () {
+            return this.visibility
+                ? this.visibility
+                : 'all';
+            //console.log(this.visibility);
         }
     },
     methods: {
         //事件处理行数中的this指向的是，当前这个根实例
-        addTodo(ev) { //添加任务
-            this.list.push({
-                title: this.todo,
-                isChecked: false,
-                edtorTodos: '' //记录是否为编辑状态
-            });
+        addTodo(ev) {
+            //添加任务
+            this
+                .list
+                .push({
+                    title: this.todo, isChecked: false, edtorTodos: '' //记录是否为编辑状态
+                });
         },
         deleteTodo(todo) { //删除任务
-            var index = this.list.indexOf(todo);
-            this.list.splice(index, 1);
+            var index = this
+                .list
+                .indexOf(todo);
+            this
+                .list
+                .splice(index, 1);
         },
         edtorTodo(todo) { //编辑任务
             //在编辑任务之前先记录一下，input里面的数据，方便取消任务的时候保存数据
@@ -114,7 +127,10 @@ var vm = new Vue({
 });
 
 function watchHashChange() {
-    var hash = window.location.hash.slice(1);
+    var hash = window
+        .location
+        .hash
+        .slice(1);
     vm.visibility = hash;
     //console.log(vm)
 }

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script>
+  
+    /* 方法一：
+    双层循环，外层循环元素，内层循环时比较值 
+    如果有相同的值则跳过，不相同则push进数组 
+     
+    var str = ['aa','bb','aa','cc'];
+    Array.prototype.distinct = function(){
+      var arr = this,
+      result = [],
+      i,
+      j,
+      len = arr.length;
+      for(i = 0; i<len; i++){
+        for(j = i+1;j<len;j++ ){
+          if(arr[i] === arr[j]){
+            j = ++i;
+          }
+        }
+        result.push(arr[i]);
+      }
+      return result;
+    }
+    document.documentElement.innerHTML = str.distinct();
+*/
+/* 
+方法二：利用splice直接在原数组进行操作
+双层循环，外层循环元素，内层循环时比较值
+值相同时，则删去这个值
+注意点:删除元素之后，需要将数组的长度也减1.
+
+ var str = ['aa','bb','aa','cc'];
+ Array.prototype.distinct = function(){
+  var arr = this,
+      i,
+      j,
+      len = arr.length;
+      for(i = 0;i<len;i++){
+        for(j=i+1;j<len;j++){
+          if(arr[i] === arr[j]){
+            arr.splice(j,1);
+            len--;
+            j--;
+          }
+        }
+      }
+      return arr;
+ }
+ document.documentElement.innerHTML = str.distinct();
+
+ var str = ['aa','bb','aa','cc',1,'1'];
+ Array.prototype.distinct = function (){
+   var arr = this,
+   i,
+   obj = {},
+   result = [],
+   len = arr.length;
+   for(i = 0; i < len; i++){
+     if(!obj[arr[i]]){
+       obj[arr[i]] = 1;
+       result.push(arr[i]);
+     }
+   }
+   return result;
+ }
+document.documentElement.innerHTML = str.distinct();
+ */
+/* Array.prototype.distinct = function(){
+  var arr = this,
+  result = [],
+  len = arr.length;
+  arr.forEach(function(v,i,arr){
+    var bool = arr.indexOf(v,i+1);
+    if(bool === -1){
+      result.push(v);
+    }
+  })
+  return result;
+}
+var str = ['aa','bb','aa','cc',1,'1'];
+document.documentElement.innerHTML = str.distinct(); */
+
+Array.prototype.distinct = function(){
+  var arr = this,
+  result = [],
+  len = arr.length;
+  arr.forEach(function(v,i,arr){
+    var bool = arr.indexOf(v,i+1);
+    console.log(v,i,bool);
+    if(bool === -1){
+      result.push(v);
+    }
+  })
+  return result;
+}
+var str = ['aa','bb','aa','cc',1,'1'];
+document.documentElement.innerHTML = str.distinct();
+
+  </script>
+</head>
+<body>
+  
+</body>
+</html>

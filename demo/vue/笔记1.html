@@ -9,16 +9,29 @@
 
 <body>
     <ul id="tags">
-        <li v-for="value in tags">{{ value }}</li>
+        <!-- <li v-for="value in tags">{{ value }}</li> -->
+        <li >{{fullName}}</li>
     </ul>
 </body>
 <script>
-    new Vue({
+    var app = new Vue({
         el: '#tags',
         data: {
-            tags: ['js', 'mvvm', 'vue.js']
-        }
+            firstName: 'Foo',
+            lastName: 'Bar',
+            fullName: 'Foo Bar'
+        },
+        watch: {
+            firstName: function (val) {
+              this.fullName = val + ' ' + this.lastName
+            },
+            lastName: function (val) {
+              this.fullName = this.firstName + ' ' + val
+            }
+          }
     })
+    console.log(app.message)
+    console.log(11,app.reversMessages())
 </script>
 
 </html>
